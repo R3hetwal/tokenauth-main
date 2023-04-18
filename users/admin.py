@@ -3,24 +3,22 @@ from users.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.forms import TextInput, Textarea
 from users.models import UserProfile
-from datetime import date
-
+from django.utils.timezone import now
 
 # Register your models here.
-
 class UserAdminConfig(UserAdmin):
 
     search_fields = ('email', 'user_name', 'first_name',)
-    filter = ('email', 'user_name', 'first_name', 'address', 'is_active', 'is_staff')
+    filter = ('email', 'user_name', 'first_name', 'address', 'is_active', 'is_staff', 'is_deleted')
     ordering = ('-date_joined',)
-    list_display = ('email', 'user_name', 'first_name', 'last_name', 'contact', 'address', 'is_active', 'is_staff')
+    list_display = ('email', 'user_name', 'first_name', 'last_name', 'contact', 'address', 'is_active', 'is_staff', 'is_deleted')
    
     # To eliminate field error
     fieldsets = (
         (None, {'fields': ('email', 'user_name', 'first_name', 'last_name', 'contact', 'address',)}),
         ('Permissions', {'fields': ('is_active', 'is_staff')}),
         ('Personal', {'fields': ('about',)}),
-        ('Soft Delete', {'fields': ('deleted_at',)}),
+        ('Soft Delete', {'fields': ('is_deleted', 'deleted_at',)}),
     )
 
     formfield_overrides = {
@@ -34,6 +32,8 @@ class UserAdminConfig(UserAdmin):
         }),
     )
 
+    def delete_queryset(self, request, queryset):
+        queryset.update(deleted_at=now())
 
 admin.site.register(User, UserAdminConfig)
 

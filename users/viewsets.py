@@ -5,8 +5,6 @@ from api.serializers.serializers import UserSerializer, UserLoginSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView, Response
 from django.db import transaction
 from django.dispatch import Signal

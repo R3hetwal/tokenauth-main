@@ -6,6 +6,8 @@ from datetime import date
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
+
+    
     def create_user(self, email, user_name, first_name, password, **other_fields):
 
         # Validating email
@@ -39,24 +41,26 @@ class CustomUserManager(BaseUserManager):
 class SoftDeleteManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(deleted_at__isnull=True)
-
+        return super().get_queryset().filter(deleted_at__isnull=True, is_deleted=False)
 class SoftDeleteModel(models.Model):
-
-    deleted_at = models.DateTimeField(null=True, default=None)
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(blank=True, null=True, default=None)
     objects = SoftDeleteManager()
     all_objects = models.Manager()
 
     def soft_delete(self):
+        self.is_deleted = True
         self.deleted_at = timezone.now()
         self.save()
 
     def restore(self):
+        self.is_deleted = False
         self.deleted_at = None
         self.save()
 
     class Meta:
         abstract = True
+
 
 class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default permission facilities that Django has
 
@@ -75,24 +79,10 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
     is_staff = models.BooleanField(default = False)
     is_active = models.BooleanField(default = False) # set to false on creation of account as we are assuming there will be some secondary check.
                                                      # example: email will be sent to user and only on click will be activated.
-    
-    # # Override delete method to soft delete the user
-    # def delete(self, using=None, keep_parents=False):
-    #     self.soft_delete()
-
-    # # Login function to check if the user account is active
-    # def login(self, password):
-    #     if not self.is_active:
-    #         return False, "Your account is currently inactive. Please reset your password to reactivate your account."
-    #     if self.check_password(password):
-    #         return True, "Login successful!"
-    #     return False, "Invalid credentials. Please try again."
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name', 'last_name', 'contact']
 
-    def __str__(self):
-        return self.email
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

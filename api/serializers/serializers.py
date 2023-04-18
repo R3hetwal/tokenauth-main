@@ -4,7 +4,8 @@ from users.models import User
 from api.models import Project, Document, Department
 from rest_framework.authtoken.models import Token
 import re 
-
+from rest_framework import status
+from rest_framework.views import Response
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
     
@@ -98,13 +99,18 @@ class UserLoginSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Please provide both email and password.')
 
+        data = User.objects.filter(email=email, is_deleted=False).first()
+
+        if not data:
+            raise serializers.ValidationError('Your account is not active. Contact the admin for activation.')
+        
         user = authenticate(email=email, password=password)
         if user is None:
             raise serializers.ValidationError(
                 'Invalid login credentials. Please try again.')
 
         return {'token': self.get_token(user), 'msg': 'Login Success'}
-
+    
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
