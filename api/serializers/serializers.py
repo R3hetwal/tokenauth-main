@@ -100,7 +100,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 'Please provide both email and password.')
 
         data = User.objects.filter(email=email, is_deleted=False).first()
-
         if not data:
             raise serializers.ValidationError('Your account is not active. Contact the admin for activation.')
         
