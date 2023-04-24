@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from users.models import User
-from api.models import Project, Document, Department
+from api.models import Project, Document, Department, UserInfo
 from rest_framework.authtoken.models import Token
 import re 
 from rest_framework import status
@@ -123,4 +123,10 @@ class DocumentSerializer(serializers.ModelSerializer):
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
+        fields = '__all__'
+
+class UserInfoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserInfo
         fields = '__all__'

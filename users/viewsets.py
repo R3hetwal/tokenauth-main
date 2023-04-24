@@ -9,10 +9,12 @@ from rest_framework.views import APIView, Response
 from django.db import transaction
 from django.dispatch import Signal
 from users.signals import *
+from api.signals import *
 
 # Create your views here.
 
 create_user_profile = Signal()
+update_user_info = Signal()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -33,6 +35,9 @@ class UserRegistrationViewSet(viewsets.ViewSet):
 
             # Trigger the create_profile signal
             create_user_profile.send(sender=User, instance=user, created=True)
+
+            # Trigger the update_user_info signal
+            update_user_info.send(sender=User, instance=user)
 
             return Response({'status': 200, 'payload': serializer.data, 'token': token.key, 'msg': 'Your data is saved!'})
         else:

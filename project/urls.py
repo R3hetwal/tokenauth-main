@@ -18,10 +18,13 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib import admin
 from users.urls import *
+from api.urls import *
 from rest_framework.authtoken import views
 from users.viewsets import UserLoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static
+from api.viewsets.viewsets import DocumentAPIView, DepartmentAPIView, UserInfoAPIView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +32,9 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path("users/v1/login/", UserLoginAPIView.as_view(), name="login"),
     path('api/v1/', include('api.urls.urls')),
+    path('api/v1/documents/', DocumentAPIView.as_view(), name='document-list'),
+    path('api/v1/departments/', DepartmentAPIView.as_view(), name='department-list'),
+    path('api/v1/userinfo/', UserInfoAPIView.as_view(), name='user-info'),
 ]
 
 if settings.DEBUG:

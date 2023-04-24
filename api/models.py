@@ -3,6 +3,7 @@ from users.models import User
 from ckeditor.fields import RichTextField
 import uuid
 from datetime import date, datetime
+from django.db.models import QuerySet as Q
 
 # Create your models here.
 
@@ -42,11 +43,11 @@ class Department(models.Model):
 
     def __str__(self):
         return self.department_name
-
-
+ 
 class Document(models.Model):
     document_name = models.CharField(max_length=255, default='Document')
-    project_name = models.ForeignKey(Project, on_delete=models.CASCADE)
+    document_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    project_name = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='documents')
     created_at = models.DateTimeField(auto_now_add=True)
     identifier = models.CharField(max_length=255, unique=True, default=uuid.uuid4, editable=False)
     content = models.TextField()
@@ -60,3 +61,31 @@ class Document(models.Model):
 class AdditionalDoc(models.Model):
         additional_documents = models.ForeignKey(Document, on_delete=models.CASCADE, default=None)
         file = models.FileField(upload_to="additional_docs/")
+
+
+class UserInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    departments = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True, related_name='department_involved')
+    projects = models.ManyToManyField(Project)
+    
+    def __str__(self):
+        return self.user.email
+
+    def get_user_info(email):
+        try:
+            user = User.objects.get(email=email)
+            user_info = UserInfo.objects.get(user=user)
+            departments = user_info.departments.filter(members=user)
+            projects = user_info.projects.all()
+            documents = Document.objects.filter(project_name__in=projects)
+            additional_docs = AdditionalDoc.objects.filter(additional_documents__in=documents)
+
+            return {
+                'user_info': user_info,
+                'departments': departments,
+                'projects': projects,
+                'documents': documents,
+                'additional_docs': additional_docs,
+            }
+        except (User.DoesNotExist, UserInfo.DoesNotExist):
+            return None
