@@ -15,4 +15,11 @@ Each project can have multiple documents with unique identifiers.
 
 *Safe Delete option for users.
 
+*API to fetch full details of an user including his projects, departments, documents and all other info.
+
+*Date filterable APIs to list files uploaded by a user, by a department.
+
+*API to summarise user stats like how many projects user has worked on a certain month of the year.
+
+*API to summarise project data as total projects, complete status, working days, members involved.
 
