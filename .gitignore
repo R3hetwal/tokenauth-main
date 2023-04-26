@@ -7,3 +7,5 @@ venv/
 /profile/
 
 "**/migrations/*"
+
+__pycache__/
