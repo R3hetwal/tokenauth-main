@@ -5,7 +5,3 @@ venv/
 /data/
 /media/
 /profile/
-
-"**/migrations/*"
-
-__pycache__/

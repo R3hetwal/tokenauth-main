@@ -19,10 +19,10 @@ class ProjectSummaryView(APIView):
         
         if id:  # retrieve single project
             '''Allows access only if user is owner of particular project'''
-            #project = get_object_or_404(Project, pk=id, owner=request.user)
+            project = get_object_or_404(Project, pk=id, owner=request.user)
 
             '''Allows details access to any user for any particular project'''
-            project = get_object_or_404(Project, pk=id)
+            # project = get_object_or_404(Project, pk=id)
             summary = {
                 'name': project.project_name,
                 'members': [member.user_name for member in project.project_members.all()],
@@ -30,10 +30,10 @@ class ProjectSummaryView(APIView):
                 'days_since_start': project.days_since_start,
             }
         else:  # retrieve all projects
-            #projects = Project.objects.filter(owner=request.user)
+            projects = Project.objects.filter(owner=request.user)
             
             '''Allow any user to access entire stat'''
-            projects = Project.objects.all()
+            # projects = Project.objects.all()
         
             department = request.GET.get('department')
             if department:

@@ -39,7 +39,6 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, user_name, first_name, password, **other_fields)
 
 class SoftDeleteManager(models.Manager):
-
     def get_queryset(self):
         return super().get_queryset().filter(deleted_at__isnull=True, is_active=False)
 
@@ -75,26 +74,18 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
     contact = models.BigIntegerField(unique=True)
     address = models.CharField(max_length=250)
     date_joined = models.DateField(null=True)
-    about = models.TextField(_('about'), max_length = 500, blank = True)
+    bio = models.TextField(blank=True)
+
+    dob = models.DateField(null=True, blank=True)
+    profile_image = models.ImageField(upload_to="profile/", blank=True)
+
+    website = models.URLField(blank=True)
+    github = models.URLField(blank=True) 
 
     is_staff = models.BooleanField(default = False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name', 'last_name', 'contact']
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-
-    location = models.CharField(max_length=50, blank=True)
-
-    address = models.CharField(max_length=50, blank=True)
-
-    dob = models.DateField(null=True, blank=True)
-    profile_image = models.ImageField(upload_to="profile/", blank=True)
-    website = models.URLField(blank=True)
-    github = models.URLField(blank=True) 
 
     @property
     def age(self):
@@ -104,7 +95,4 @@ class UserProfile(models.Model):
             return age
         return None
 
-    def __str__(self):
-        return f"{self.user.user_name}'s profile"
-    
 

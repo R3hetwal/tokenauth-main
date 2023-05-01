@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  web:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8001
+    volumes: 
+      - .:/app
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    container_name: django_container
+    entrypoint: sh /app/entrypoint.sh
+    
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - 5433:5432
+    container_name: postgres_db
+
+  celery:
+    env_file: .env
+    restart: always
+    entrypoint: celery --app=project worker -l info
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - web
+      - redis
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis_data:/var/lib/redis
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    entrypoint: "celery -A project worker -f /logs/worker.log -l DEBUG"
+    depends_on:
+      - web
+      - redis
+    volumes:
+      - .:/app
+      - ./logs/:/logs/
+    env_file:
+      - .env
+
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    entrypoint: "celery -A project beat -f /logs/worker.log -l DEBUG"
+    depends_on:
+      - web
+      - redis
+    volumes:
+      - .:/app
+      - ./logs/:/logs/
+    env_file:
+      - .env
