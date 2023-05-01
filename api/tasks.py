@@ -1,6 +1,5 @@
 import random
-import pytz
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
@@ -9,15 +8,26 @@ from celery import shared_task
 from django.db.models.functions import TruncWeek, TruncMonth
 from django.db.models import Count
 from core.models import Project
-import os
-import json
-
+# import os
+# import json
 
 @shared_task(
+    # specifies that the task instance will be passed as the first argument to the task function. 
+    # This is useful if you need access to the task instance within your function.
     bind=True,
+
+    # specifies that the task should automatically retry in case of any exception.
     autoretry_for=(Exception,),
+
+    # specifies the base time (in seconds) to wait before retrying the task. 
+    # The actual time is increased exponentially with each retry.
     retry_backoff=5,
+
+    # specifies whether to add a random amount of jitter to the retry wait time. 
+    # This helps to prevent a large number of tasks from retrying at exactly the same time.
     retry_jitter=True,
+
+    # specifies the maximum number of times the task should be retried in case of failure.
     retry_kwargs={"max_retries": 3},
 )
 def create_dummy_projects(self, num_projects):
@@ -74,13 +84,13 @@ def group_dummy_projects(self):
         .annotate(count=Count('id'))
     )
 
-    # Example response format for weekly grouping
+    # Response format for weekly grouping
     response_weekly = {}
     for project in projects_by_week:
         week_number = project['week'].strftime('%B_week_%W') if project['week'] is not None else 'None'
         response_weekly[week_number] = project['count']
 
-    # Example response format for monthly grouping
+    # Response format for monthly grouping
     response_monthly = {}
     for project in projects_by_month:
         month_number = project['month'].strftime('%B_%Y') if project['month'] is not None else 'None'
