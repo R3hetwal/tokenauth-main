@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from users.models import User
 from api.serializers.serializers import UserSerializer, UserLoginSerializer
@@ -6,13 +5,6 @@ from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.views import APIView, Response
-# from django.db import transaction
-# from django.dispatch import Signal
-# from users.signals import *
-
-# Create your views here.
-
-# create_user_profile = Signal()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -21,7 +13,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserRegistrationViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
 
-    # @transaction.atomic
     def create(self, request):
         """
         Create a new User instance with the provided data.
@@ -30,10 +21,6 @@ class UserRegistrationViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             user = serializer.save()
             token, created = Token.objects.get_or_create(user=user)
-
-            # # Trigger the create_profile signal
-            # create_user_profile.send(sender=User, instance=user, created=True)
-
             return Response({'status': 200, 'payload': serializer.data, 'token': token.key, 'msg': 'Your data is saved!'})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

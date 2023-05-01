@@ -4,7 +4,8 @@ from ckeditor.fields import RichTextField
 import uuid
 from datetime import date, datetime
 from django.db.models import QuerySet as Q
-from users.models import UserProfile
+from core.celery_models import SummaryData
+
 
 # Create your models here.
 

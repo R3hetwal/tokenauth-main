@@ -34,6 +34,7 @@ urlpatterns = [
     path("users/v1/login/", UserLoginAPIView.as_view(), name="login"),
     path('api/v1/', include('api.urls.urls')),
     path('api/v1/stats/', include('api.urls.statsurls')),
+    
     path('api/v1/documents/', DocumentAPIView.as_view(), name='document-list'),
     path('api/v1/departments/', DepartmentAPIView.as_view(), name='department-list'),
 
@@ -41,7 +42,7 @@ urlpatterns = [
     path('api/v1/userinfo/<str:user_name>/', UserInfoAPIView.as_view(), name='user-info'),
 
     #Fetch filterable data
-    path('api/v1/filesuploaded/documents/', UserFilesView.as_view(), name='files-uploaded'),
+    path('api/v1/filesuploaded/documents/', UserFilesView.as_view(), name='files-uploaded'),    
 
     #User Stats
     path('api/v1/user-stats/<int:user_id>/', UserStatsView.as_view(), name='user-stats'),

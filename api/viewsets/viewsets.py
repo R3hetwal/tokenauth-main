@@ -6,7 +6,7 @@ from core.models import Project, Document, Department
 from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.dispatch import Signal
+# from django.dispatch import Signal
 from api.signals import *
 from datetime import datetime
 from users.models import User
@@ -15,7 +15,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 
-update_user_info = Signal()
+# update_user_info = Signal()
 
 class ProjectViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
@@ -37,7 +37,7 @@ class ProjectViewSet(viewsets.ViewSet):
         serializer_class = ProjectSerializer(data=request.data)
         if serializer_class.is_valid():
             serializer_class.save()
-            update_user_info.send(sender=Project, user=request.user, action="create")
+            # update_user_info.send(sender=Project, user=request.user, action="create")
             return Response({'msg':'Data Created'}, status=status.HTTP_201_CREATED)
         return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -47,7 +47,7 @@ class ProjectViewSet(viewsets.ViewSet):
         serializer_class = ProjectSerializer(queryset, data=request.data)
         if serializer_class.is_valid():
             serializer_class.save()
-            update_user_info.send(sender=Project, user=request.user, action="update")
+            # update_user_info.send(sender=Project, user=request.user, action="update")
             return Response({'msg':'Complete Data Updated'})
         return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -57,7 +57,7 @@ class ProjectViewSet(viewsets.ViewSet):
         serializer_class = ProjectSerializer(queryset, data=request.data, partial=True)
         if serializer_class.is_valid():
             serializer_class.save()
-            update_user_info.send(sender=Project, user=request.user, action="partial_update")
+            # update_user_info.send(sender=Project, user=request.user, action="partial_update")
             return Response({'msg':'Partial Data Updated'})
         return Response(serializer_class.errors)
     
@@ -65,7 +65,7 @@ class ProjectViewSet(viewsets.ViewSet):
         id = pk
         queryset = Project.objects.get(pk=id)
         queryset.delete()
-        update_user_info.send(sender=Project, user=request.user, action="delete")
+        # update_user_info.send(sender=Project, user=request.user, action="delete")
         return Response({'msg':'Data Deleted'})
     
 class DocumentAPIView(APIView):
@@ -81,23 +81,25 @@ class DocumentAPIView(APIView):
         serializer = DocumentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            update_user_info.send(sender=Document, user=request.user, action="create")
+            # update_user_info.send(sender=Document, user=request.user, action="create")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        document = Document.objects.get(pk=pk)
+        id = pk
+        document = Document.objects.get(id=id)
         serializer = DocumentSerializer(document, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            update_user_info.send(sender=Document, user=request.user, action="update")
+            # update_user_info.send(sender=Document, user=request.user, action="update")
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        document = Document.objects.get(pk=pk)
+        id = pk
+        document = Document.objects.get(id=id)
         document.delete()
-        update_user_info.send(sender=Document, user=request.user, action="delete")
+        # update_user_info.send(sender=Document, user=request.user, action="delete")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class DepartmentAPIView(APIView):
@@ -113,7 +115,7 @@ class DepartmentAPIView(APIView):
         serializer = DepartmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            update_user_info.send(sender=Department, user=request.user, action="create")
+            # update_user_info.send(sender=Department, user=request.user, action="create")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -122,14 +124,14 @@ class DepartmentAPIView(APIView):
         serializer = DepartmentSerializer(department, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            update_user_info.send(sender=Department, user=request.user, action="update")
+            # update_user_info.send(sender=Department, user=request.user, action="update")
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         department = Department.objects.get(pk=pk)
         department.delete()
-        update_user_info.send(sender=Department, user=request.user, action="delete")
+        # update_user_info.send(sender=Department, user=request.user, action="delete")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

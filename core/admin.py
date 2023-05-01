@@ -88,3 +88,9 @@ admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(AdditionalDoc, AdditionalDocAdmin)
+
+from core.celery_models import SummaryData
+
+@admin.register(SummaryData)
+class SummaryDataAdmin(admin.ModelAdmin):
+    list_display = ('month', 'year', 'total_projects', 'total_users')
