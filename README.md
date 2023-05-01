@@ -23,3 +23,7 @@ Each project can have multiple documents with unique identifiers.
 
 *API to summarise project data as total projects, complete status, working days, members involved.
 
+## Implementation of celery and redis.
+* Created an model to store monthly, annual summary data of the system like total_projects, total_users etc. and update it every night by ruuning a     ascheduled task using celery.
+* Added 100000 dummy data rows to the Project table, mark them as active and inactive respetively if their deadline are after or before today as a background task.
+* Grouped the 100000 Projects by their created date in each week of a month.
