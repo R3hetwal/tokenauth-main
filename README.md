@@ -27,3 +27,7 @@ Each project can have multiple documents with unique identifiers.
 * Created an model to store monthly, annual summary data of the system like total_projects, total_users etc. and update it every night by ruuning a     ascheduled task using celery.
 * Added 100000 dummy data rows to the Project table, mark them as active and inactive respetively if their deadline are after or before today as a background task.
 * Grouped the 100000 Projects by their created date in each week of a month.
+
+## Implementation of basic WebGIS data formats, conversion between them and use them in postgis.
+* Added a point field home_address on User model to store location of an user.
+* Added a model ProjectSite to store GIS data of a project. Have included a pointfield for project site coordinates, a polygon for area for the project site, a LineString for way from project site to the home_address of project creator.
