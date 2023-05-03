@@ -203,7 +203,6 @@ The double underscore __ is used to perform a lookup across a relation.
 Specifically, the department_name__id part of the lookup refers to the id attribute of the 
 department_name ForeignKey relationship. '''
 
-
 class ProjectSiteViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSiteSerializer
     queryset = ProjectSite.objects.all()

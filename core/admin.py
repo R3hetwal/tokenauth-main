@@ -83,7 +83,6 @@ class DocumentAdmin(admin.ModelAdmin):
 class AdditionalDocAdmin(admin.ModelAdmin):
     list_display = ['file']
 
-
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Document, DocumentAdmin)

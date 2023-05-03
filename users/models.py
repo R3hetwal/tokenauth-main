@@ -62,7 +62,6 @@ class SoftDeleteModel(models.Model):
     class Meta:
         abstract = True
 
-
 class Address(models.Model):
     home_address = models.CharField(max_length = 150, null=True, blank=True,)
     location = models.PointField(null=True, blank=True, srid=4326)
