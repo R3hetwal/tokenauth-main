@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from api.viewsets.viewsets import ProjectViewSet, DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView
+from api.viewsets.viewsets import ProjectViewSet, DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView, ProjectSiteViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet, basename="project")
+router.register(r'projectsite', ProjectSiteViewSet, basename="project_site")
 
 
 urlpatterns = [

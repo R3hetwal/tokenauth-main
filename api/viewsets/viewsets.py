@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from core.models import Project, Document, Department
-from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer
+from core.models import Project, Document, Department, ProjectSite
+from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer, ProjectSiteSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 # from django.dispatch import Signal
@@ -190,7 +190,7 @@ class UserFilesView(APIView):
             documents = documents.filter(project_name__id=project_name)
 
         # filter by created_at date
-        created_at = request.query_params.get('created_at', None)
+        created_at = request.query_params.get('created_at', None)    
         if created_at is not None:
             created_at = datetime.strptime(created_at, '%Y-%m-%d').date()
             documents = documents.filter(created_at__date=created_at)
@@ -202,3 +202,7 @@ class UserFilesView(APIView):
 The double underscore __ is used to perform a lookup across a relation. 
 Specifically, the department_name__id part of the lookup refers to the id attribute of the 
 department_name ForeignKey relationship. '''
+
+class ProjectSiteViewSet(viewsets.ModelViewSet):
+    serializer_class = ProjectSiteSerializer
+    queryset = ProjectSite.objects.all()

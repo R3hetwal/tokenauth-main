@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils import timezone
 from datetime import date
+from django.contrib.gis.db import models
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -61,6 +62,12 @@ class SoftDeleteModel(models.Model):
     class Meta:
         abstract = True
 
+class Address(models.Model):
+    home_address = models.CharField(max_length = 150, null=True, blank=True,)
+    location = models.PointField(null=True, blank=True, srid=4326)
+
+    def __str__(self):
+        return self.home_address
 
 class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default permission facilities that Django has
 
@@ -69,10 +76,10 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
 
     email = models.EmailField(_('email address'), unique = True)
     user_name = models.CharField(max_length = 150, unique = True)
-    first_name = models.CharField(max_length = 150) 
+    first_name = models.CharField(max_length = 150)
+    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
     last_name = models.CharField(max_length=250)
-    contact = models.BigIntegerField(unique=True)
-    address = models.CharField(max_length=250)
+    contact = models.CharField(unique=True)
     date_joined = models.DateField(null=True)
     bio = models.TextField(blank=True)
 
@@ -96,3 +103,11 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
         return None
 
 
+    def delete(self, using=None, keep_parents=False, hard=False):
+        if hard:
+            super().delete(using=using, keep_parents=keep_parents)
+        else:
+            self.soft_delete()
+            
+    class Meta:
+        db_table = "user"

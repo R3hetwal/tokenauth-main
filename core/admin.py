@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Project, Department, Document, AdditionalDoc
+from core.models import Project, Department, Document, AdditionalDoc, ProjectSite
 from django.http import HttpResponse
 import csv
 import xlwt
@@ -83,7 +83,6 @@ class DocumentAdmin(admin.ModelAdmin):
 class AdditionalDocAdmin(admin.ModelAdmin):
     list_display = ['file']
 
-
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Document, DocumentAdmin)
@@ -93,4 +92,8 @@ from core.celery_models import SummaryData
 
 @admin.register(SummaryData)
 class SummaryDataAdmin(admin.ModelAdmin):
-    list_display = ('month', 'year', 'total_projects', 'total_users')
+    list_display = ('month', 'year', 'total_projects', 'total_users',)
+
+@admin.register(ProjectSite)
+class ProjectSiteAdmin(admin.ModelAdmin):
+    list_display = ('site_name',)

@@ -1,10 +1,10 @@
 from django.db import models
-from users.models import User
+from users.models import User, Address
 from ckeditor.fields import RichTextField
 import uuid
 from datetime import date, datetime
 from django.db.models import QuerySet as Q
-from core.celery_models import SummaryData
+from django.contrib.gis.db import models
 
 
 # Create your models here.
@@ -70,6 +70,16 @@ class Document(models.Model):
 
 
 class AdditionalDoc(models.Model):
-        additional_documents = models.ForeignKey(Document, on_delete=models.CASCADE, default=None)
-        file = models.FileField(upload_to="additional_docs/")
+    additional_documents = models.ForeignKey(Document, on_delete=models.CASCADE, default=None)
+    file = models.FileField(upload_to="additional_docs/")
 
+
+class ProjectSite(models.Model):
+    site_name=models.CharField(max_length=255)
+    project=models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_site', null=True, blank=True)
+    site_location=models.OneToOneField(Address, on_delete=models.CASCADE, blank=True, null=True)
+    site_area=models.PolygonField(blank=True, null=True)
+    way=models.LineStringField(blank=True, null=True)
+
+    def __str__(self):
+        return self.site_name

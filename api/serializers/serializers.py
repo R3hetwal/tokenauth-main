@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from users.models import User
-from core.models import Project, Document, Department
+from users.models import User, Address
+from core.models import Project, Document, Department, ProjectSite
 from rest_framework.authtoken.models import Token
 import re 
 from rest_framework import status
 from rest_framework.views import Response
+from django.contrib.gis.geos import Point
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
@@ -126,8 +127,50 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+
+#GIS Data
+class PointSerializer(serializers.Field):
+    def to_representation(self, value):
+        if isinstance(value, Point):
+            return {'latitude': value.y, 'longitude': value.x}
+        return None
+    
+class AddressSerializer(serializers.ModelSerializer):
+    location = PointSerializer()
+
+    class Meta:
+        model = Address
+        fields = ('home_address', 'location')
+
+class ProjectSiteSerializer(serializers.ModelSerializer):
+    length = serializers.SerializerMethodField()
+    area = serializers.SerializerMethodField()
+    site_location = AddressSerializer()
+    project = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProjectSite
+        fields = ('site_name', 'project', 'length', 'area', 'site_location',)
+
+    def get_length(self, obj):
+        if hasattr(obj, 'way') and obj.way:
+            return obj.way.length
+        return 0.0
+
+    def get_area(self, obj):
+        if obj.way:
+            return obj.site_area.area
+        return 0.0
+    
+    def get_project(self, obj):
+        if obj.project:
+            return obj.project.project_name
+        return None
+
+#UserInfo including GIS address
 class UserInfoSerializer(serializers.ModelSerializer):
+    address = AddressSerializer()
+    
     class Meta:
         model = User
         fields = '__all__'
-

@@ -5,3 +5,5 @@ venv/
 /data/
 /media/
 /profile/
+/redis_data/
+/logs/

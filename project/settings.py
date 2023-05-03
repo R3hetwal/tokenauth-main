@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     #schedule_task
     "django_celery_results",
     "django_celery_beat",
+
+    #GIS Data   
+    "django.contrib.gis",
 ]
 
 MIDDLEWARE = [
