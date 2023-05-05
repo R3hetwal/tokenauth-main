@@ -2,16 +2,25 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from core.models import Project, Document, Department, ProjectSite
-from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer, ProjectSiteSerializer
+from core.models import Project, Document, Department, ProjectSite, Path
+from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer, ProjectSiteSerializer, PathSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-# from django.dispatch import Signal
-from api.signals import *
+from django.contrib.gis.geos import Point
 from datetime import datetime
 from users.models import User
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+
+import os
+import psycopg2
+import shapefile
+import zipfile
+from django.conf import settings
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -203,6 +212,90 @@ The double underscore __ is used to perform a lookup across a relation.
 Specifically, the department_name__id part of the lookup refers to the id attribute of the 
 department_name ForeignKey relationship. '''
 
+
+class PathViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+    serializer_class = PathSerializer
+    queryset = Path.objects.all()
+
+class ExportShapeFile(APIView):
+    def get_project_sites(self):
+        # Connect to the database
+        conn = psycopg2.connect(
+            database=settings.DATABASES['default']['NAME'],
+            user=settings.DATABASES['default']['USER'],
+            password=settings.DATABASES['default']['PASSWORD'],
+            host=settings.DATABASES['default']['HOST'],
+            port=settings.DATABASES['default']['PORT'],
+        )
+        # Create a cursor object
+        cur = conn.cursor()
+        # Query the database
+        query = 'SELECT  project_id, site_location_id, site_area, way_id FROM core_projectsite'
+        cur.execute(query)
+        # Fetch all the results
+        results = cur.fetchall()
+        # Close the cursor and database connection
+        cur.close()
+        conn.close()
+        # Write the results to a shapefile using pyshp
+        shp_path = os.path.join(settings.BASE_DIR, 'project_sites.shp')
+        w = shapefile.Writer(shp_path, shapeType=shapefile.POINT)
+        w.autoBalance = 1
+        w.field('project_id', 'N') 
+        w.field('site_location_id', 'N')
+        w.field('site_area', 'F', decimal=2)
+        w.field('way_id', 'N')
+
+        '''In this code block, the results variable contains the results of the database query. 
+        The for loop iterates over each row in the results and extracts the relevant fields for 
+        creating the shapefile. The try-except block tries to write a point to the shapefile and a 
+        record to the attribute table for each row, using the point() and record() methods of the 
+        Writer object w. If a ValueError is raised, it means that one of the fields has an invalid data 
+        type, so the row is skipped. Finally, the close() method is called on the Writer object to 
+        close the shapefile and return the path to the shapefile.'''
+
+        for row in results:
+            try:
+                w.point(float(row[3]), float(row[2]))
+                w.record(int(row[0]), int(row[1]), float(row[2]), int(row[3]))
+            except ValueError:
+                # skip rows with invalid data types
+                pass
+        w.close()
+        return shp_path
+
+    def export_project_sites(self):
+        # Get the path to the shapefile
+        shp_path = self.get_project_sites()
+        # Compress the shapefile to a zip file
+        zip_path = os.path.join(settings.BASE_DIR, 'project_sites.zip')
+        with zipfile.ZipFile(zip_path, 'w') as myzip:
+            myzip.write(shp_path)
+            myzip.write(shp_path.replace('.shp', '.dbf'))
+            myzip.write(shp_path.replace('.shp', '.shx'))
+        # Remove the shapefile to avoid leaving any unnecessary files in the server file system, 
+        # which could potentially take up storage space and create clutter.
+        os.remove(shp_path)
+        os.remove(shp_path.replace('.shp', '.dbf'))
+        os.remove(shp_path.replace('.shp', '.shx'))
+        # Open the zip file and read its contents
+        with open(zip_path, 'rb') as f:
+            response = HttpResponse(f.read(), content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename=project_sites.zip'
+            return response
+
+    def get(self, request):
+        if request.method == 'GET':
+            response = self.export_project_sites()
+            return response
+        else:
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 class ProjectSiteViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
     serializer_class = ProjectSiteSerializer
     queryset = ProjectSite.objects.all()
+

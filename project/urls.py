@@ -23,7 +23,7 @@ from rest_framework.authtoken import views
 from users.viewsets import UserLoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static
-from api.viewsets.viewsets import DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView
+from api.viewsets.viewsets import DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView, ExportShapeFile
 from api.viewsets.userstatsviewsets import UserStatsView
 from api.viewsets.projectstats import ProjectSummaryView
 
@@ -50,6 +50,8 @@ urlpatterns = [
     #Project Stats
     path('api/v1/project-stats/', ProjectSummaryView.as_view(), name='project_summary'),
     path('api/v1/project-stats/<int:pk>/', ProjectSummaryView.as_view(), name='project-summary-detail'),
+
+    path('api/v1/export-shapefile/', ExportShapeFile.as_view(), name='export-shapefile'),
 ]
 
 if settings.DEBUG:

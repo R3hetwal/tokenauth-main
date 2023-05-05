@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Project, Department, Document, AdditionalDoc, ProjectSite
+from core.models import Project, Department, Document, AdditionalDoc, ProjectSite, Path
 from django.http import HttpResponse
 import csv
 import xlwt
@@ -96,4 +96,8 @@ class SummaryDataAdmin(admin.ModelAdmin):
 
 @admin.register(ProjectSite)
 class ProjectSiteAdmin(admin.ModelAdmin):
-    list_display = ('site_name',)
+    list_display = ('site_name', 'project',)
+
+@admin.register(Path)
+class PathAdmin(admin.ModelAdmin):
+    list_display = ('site_address', 'site_loc',)

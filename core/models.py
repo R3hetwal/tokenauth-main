@@ -73,13 +73,20 @@ class AdditionalDoc(models.Model):
     additional_documents = models.ForeignKey(Document, on_delete=models.CASCADE, default=None)
     file = models.FileField(upload_to="additional_docs/")
 
+class Path(models.Model):
+    home = models.OneToOneField(Address, on_delete=models.CASCADE, related_name='home')
+    site_address = models.CharField(null=True, blank=True)
+    site_loc = models.PointField(null=True, blank=True, srid=4326)
+
+    def __str__(self):
+        return self.site_address
 
 class ProjectSite(models.Model):
     site_name=models.CharField(max_length=255)
     project=models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_site', null=True, blank=True)
-    site_location=models.OneToOneField(Address, on_delete=models.CASCADE, blank=True, null=True)
+    site_location=models.OneToOneField(Path, on_delete=models.CASCADE, blank=True, null=True)
     site_area=models.PolygonField(blank=True, null=True)
-    way=models.LineStringField(blank=True, null=True)
+    way = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='way', blank=True, null=True)
 
     def __str__(self):
         return self.site_name
