@@ -31,3 +31,4 @@ Each project can have multiple documents with unique identifiers.
 ## Implementation of basic WebGIS data formats, conversion between them and use them in postgis.
 * Added a point field home_address on User model to store location of an user.
 * Added a model ProjectSite to store GIS data of a project. Have included a pointfield for project site coordinates, a polygon for area for the project site, a LineString for way from project site to the home_address of project creator.
+* Export project site data to an shapefile (.shp)
