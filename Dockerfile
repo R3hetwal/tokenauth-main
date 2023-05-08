@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y libpq-dev build-essential && apt-get in
 
 COPY ./requirements.txt /app/requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 
 # RUN apt-get update && apt-get install -y postgis

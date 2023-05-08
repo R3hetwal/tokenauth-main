@@ -23,9 +23,11 @@ from rest_framework.authtoken import views
 from users.viewsets import UserLoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static
-from api.viewsets.viewsets import DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView, ExportShapeFile
+from api.viewsets.viewsets import DocumentAPIView, DepartmentAPIView, UserInfoAPIView, UserFilesView, export_shapefile
 from api.viewsets.userstatsviewsets import UserStatsView
 from api.viewsets.projectstats import ProjectSummaryView
+from api.utility.import_utility import import_layer
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,7 +53,8 @@ urlpatterns = [
     path('api/v1/project-stats/', ProjectSummaryView.as_view(), name='project_summary'),
     path('api/v1/project-stats/<int:pk>/', ProjectSummaryView.as_view(), name='project-summary-detail'),
 
-    path('api/v1/export-shapefile/', ExportShapeFile.as_view(), name='export-shapefile'),
+    path('api/v1/export-shapefile/', export_shapefile, name='export-shapefile'),
+    path('api/v1/import-shapefile/', import_layer, name="import_shapefile"),
 ]
 
 if settings.DEBUG:

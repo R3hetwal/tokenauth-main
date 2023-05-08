@@ -4,11 +4,10 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.utils import timezone
 from datetime import date
 from django.contrib.gis.db import models
+from core.models import Project
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-
-    
     def create_user(self, email, user_name, first_name, password, **other_fields):
 
         # Validating email
@@ -77,7 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
     email = models.EmailField(_('email address'), unique = True)
     user_name = models.CharField(max_length = 150, unique = True)
     first_name = models.CharField(max_length = 150)
-    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True, related_name='user')
     last_name = models.CharField(max_length=250)
     contact = models.CharField(unique=True)
     date_joined = models.DateField(null=True)
@@ -85,9 +84,10 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
 
     dob = models.DateField(null=True, blank=True)
     profile_image = models.ImageField(upload_to="profile/", blank=True)
+    project = models.ForeignKey(Project, on_delete=models.PROTECT, blank=True, null=True, related_name='users')
 
     website = models.URLField(blank=True)
-    github = models.URLField(blank=True) 
+    github = models.URLField(blank=True)
 
     is_staff = models.BooleanField(default = False)
 

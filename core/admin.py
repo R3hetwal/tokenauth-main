@@ -1,12 +1,13 @@
 from django.contrib import admin
-from core.models import Project, Department, Document, AdditionalDoc, ProjectSite, Path
+from core.models import Project, Department, Document, AdditionalDoc, ProjectSiteAddress
 from django.http import HttpResponse
 import csv
 import xlwt
 
+
 # Register your models here.
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ('department_name', 'department_head', 'creation_date', 'active_days',)
+    list_display = ('id', 'department_name', 'department_head', 'creation_date', 'active_days',)
     list_filter = ('project', 'department_name')
     actions = ['export_as_csv'] 
 
@@ -25,7 +26,7 @@ class DepartmentAdmin(admin.ModelAdmin):
     export_as_csv.short_description = "Export selected as CSV"
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['project_name', 'description', 'start_date', 'days_since_start', 'deadline', 'complete',]
+    list_display = ['id', 'project_name', 'description', 'start_date', 'days_since_start', 'deadline', 'complete',]
     list_filter = ('start_date', 'complete')
     actions = ['export_as_csv', 'export_as_xls']
 
@@ -94,10 +95,21 @@ from core.celery_models import SummaryData
 class SummaryDataAdmin(admin.ModelAdmin):
     list_display = ('month', 'year', 'total_projects', 'total_users',)
 
-@admin.register(ProjectSite)
-class ProjectSiteAdmin(admin.ModelAdmin):
-    list_display = ('site_name', 'project',)
+@admin.register(ProjectSiteAddress)
+class ProjectSiteAddressAdmin(admin.ModelAdmin):
+    list_display = ('id', 'geom', 'project',)
 
-@admin.register(Path)
-class PathAdmin(admin.ModelAdmin):
-    list_display = ('site_address', 'site_loc',)
+# @admin.register(ProjectSite)
+# class ProjectSiteAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'site_loc', 'site_area']
+#     actions=('export_as_csv',)
+
+#     def export_as_csv(self, request, queryset):
+#         response = HttpResponse(content_type='text/csv')
+#         response['Content-Disposition'] = 'attachment; filename="documents.csv"'
+#         writer = csv.writer(response)
+#         writer.writerow(['Site Location', 'Site Area'])
+#         for projectsite in queryset:
+#             writer.writerow([projectsite.site_loc.geom, projectsite.site_area.geom])
+#         return response
+#     export_as_csv.short_description = "Export selected as CSV"

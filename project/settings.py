@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     #GIS Data   
     "django.contrib.gis",
+    # "import_export",
 ]
 
 MIDDLEWARE = [

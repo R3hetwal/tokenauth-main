@@ -11,7 +11,7 @@ class UserAdminConfig(UserAdmin):
     search_fields = ('email', 'user_name', 'first_name',)
     filter = ('email', 'user_name', 'first_name', 'address', 'is_active', 'is_staff',)
     ordering = ('-date_joined',)
-    list_display = ('email', 'user_name', 'first_name', 'last_name', 'dob', 'contact', 'address', 'is_active', 'is_staff', )
+    list_display = ('email', 'user_name', 'first_name', 'last_name', 'project', 'dob', 'contact', 'address', 'is_active', 'is_staff', )
     actions = ['delete_selected']
     
     def delete_selected(self, request, queryset):
@@ -26,6 +26,7 @@ class UserAdminConfig(UserAdmin):
     # To eliminate field error
     fieldsets = (
         (None, {'fields': ('email', 'user_name', 'first_name', 'last_name',)}),
+        ('Task', {'fields': ('project',)}), 
         ('Personal', {'fields': ('contact', 'address', 'dob',)}),
         ('Profile', {'fields': ('bio', 'profile_image',)}),
         ('Social', {'fields': ('github', 'website',)}),

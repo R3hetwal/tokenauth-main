@@ -1,31 +1,34 @@
+import ast
+from glob import glob
+import tempfile
+from urllib import request
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from core.models import Project, Document, Department, ProjectSite, Path
-from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer, ProjectSiteSerializer, PathSerializer
+from api.utility.export_utility import layer_exporter
+from api.utility.utility import extract_shapefile
+from core.models import Project, Document, Department, ProjectSiteAddress
+from api.serializers.serializers import ProjectSerializer, DocumentSerializer, DepartmentSerializer, UserInfoSerializer, ProjectSiteSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.gis.geos import Point
 from datetime import datetime
-from users.models import User
+from users.models import Address, User
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-
 import os
+import geopandas as gpd
 import psycopg2
 import shapefile
 import zipfile
+from django.contrib.gis.geos import GEOSGeometry
 from django.conf import settings
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
 from django.http import HttpResponse
+import shutil
+from rest_framework.decorators import api_view
 
 # Create your views here.
-
-# update_user_info = Signal()
-
 class ProjectViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -90,7 +93,6 @@ class DocumentAPIView(APIView):
         serializer = DocumentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # update_user_info.send(sender=Document, user=request.user, action="create")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -100,7 +102,6 @@ class DocumentAPIView(APIView):
         serializer = DocumentSerializer(document, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # update_user_info.send(sender=Document, user=request.user, action="update")
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -108,7 +109,6 @@ class DocumentAPIView(APIView):
         id = pk
         document = Document.objects.get(id=id)
         document.delete()
-        # update_user_info.send(sender=Document, user=request.user, action="delete")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class DepartmentAPIView(APIView):
@@ -124,7 +124,6 @@ class DepartmentAPIView(APIView):
         serializer = DepartmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # update_user_info.send(sender=Department, user=request.user, action="create")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -133,14 +132,12 @@ class DepartmentAPIView(APIView):
         serializer = DepartmentSerializer(department, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # update_user_info.send(sender=Department, user=request.user, action="update")
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         department = Department.objects.get(pk=pk)
         department.delete()
-        # update_user_info.send(sender=Department, user=request.user, action="delete")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -213,89 +210,114 @@ Specifically, the department_name__id part of the lookup refers to the id attrib
 department_name ForeignKey relationship. '''
 
 
-class PathViewSet(viewsets.ModelViewSet):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = (IsAuthenticated,)
-    serializer_class = PathSerializer
-    queryset = Path.objects.all()
+# class PathViewSet(viewsets.ModelViewSet):
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = PathSerializer
+#     queryset = Path.objects.all()
 
-class ExportShapeFile(APIView):
-    def get_project_sites(self):
-        # Connect to the database
-        conn = psycopg2.connect(
-            database=settings.DATABASES['default']['NAME'],
-            user=settings.DATABASES['default']['USER'],
-            password=settings.DATABASES['default']['PASSWORD'],
-            host=settings.DATABASES['default']['HOST'],
-            port=settings.DATABASES['default']['PORT'],
-        )
-        # Create a cursor object
-        cur = conn.cursor()
-        # Query the database
-        query = 'SELECT  project_id, site_location_id, site_area, way_id FROM core_projectsite'
-        cur.execute(query)
-        # Fetch all the results
-        results = cur.fetchall()
-        # Close the cursor and database connection
-        cur.close()
-        conn.close()
-        # Write the results to a shapefile using pyshp
-        shp_path = os.path.join(settings.BASE_DIR, 'project_sites.shp')
-        w = shapefile.Writer(shp_path, shapeType=shapefile.POINT)
-        w.autoBalance = 1
-        w.field('project_id', 'N') 
-        w.field('site_location_id', 'N')
-        w.field('site_area', 'F', decimal=2)
-        w.field('way_id', 'N')
-
-        '''In this code block, the results variable contains the results of the database query. 
-        The for loop iterates over each row in the results and extracts the relevant fields for 
-        creating the shapefile. The try-except block tries to write a point to the shapefile and a 
-        record to the attribute table for each row, using the point() and record() methods of the 
-        Writer object w. If a ValueError is raised, it means that one of the fields has an invalid data 
-        type, so the row is skipped. Finally, the close() method is called on the Writer object to 
-        close the shapefile and return the path to the shapefile.'''
-
-        for row in results:
-            try:
-                w.point(float(row[3]), float(row[2]))
-                w.record(int(row[0]), int(row[1]), float(row[2]), int(row[3]))
-            except ValueError:
-                # skip rows with invalid data types
-                pass
-        w.close()
-        return shp_path
-
-    def export_project_sites(self):
-        # Get the path to the shapefile
-        shp_path = self.get_project_sites()
-        # Compress the shapefile to a zip file
-        zip_path = os.path.join(settings.BASE_DIR, 'project_sites.zip')
-        with zipfile.ZipFile(zip_path, 'w') as myzip:
-            myzip.write(shp_path)
-            myzip.write(shp_path.replace('.shp', '.dbf'))
-            myzip.write(shp_path.replace('.shp', '.shx'))
-        # Remove the shapefile to avoid leaving any unnecessary files in the server file system, 
-        # which could potentially take up storage space and create clutter.
-        os.remove(shp_path)
-        os.remove(shp_path.replace('.shp', '.dbf'))
-        os.remove(shp_path.replace('.shp', '.shx'))
-        # Open the zip file and read its contents
-        with open(zip_path, 'rb') as f:
-            response = HttpResponse(f.read(), content_type='application/zip')
-            response['Content-Disposition'] = 'attachment; filename=project_sites.zip'
-            return response
-
-    def get(self, request):
-        if request.method == 'GET':
-            response = self.export_project_sites()
-            return response
-        else:
-            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-class ProjectSiteViewSet(viewsets.ModelViewSet):
+class ProjectSiteAddressViewSet(viewsets.ModelViewSet):
+    
     authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)
     serializer_class = ProjectSiteSerializer
-    queryset = ProjectSite.objects.all()
+    queryset = ProjectSiteAddress.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        from django.contrib.gis import geos
+        
+        try:
+            geom = geos.GEOSGeometry(request.data.get('geom'))
+        except geos.GEOSException as e:
+            return Response({'error': str(e)}, status=400)  
+         
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
+            geom_type = instance.geom.geom_type.lower()
+            dummy_geom = instance.geom
+            area = 0.0
+            if geom_type in "multipolygon" or "polygon":
+                # dummy_geom.transform(srid=3857)
+                area = dummy_geom.area
+            instance.area = area
+            if geom_type in ["multipoint", "point"]:
+                instance.geom_type = "point"
+            elif geom_type in ['polygon', 'multipolygon']:
+                instance.geom_type = "polygon"
+            else:
+                return Response("Error: GEOM type not supported.")
+            
+            project_id = serializer.validated_data.get('project').id
+            project = Project.objects.get(id=project_id)
+            site = project.projectsites.filter(geom_type=geom_type).first()
+            if site:
+                site.delete()
+            instance.save()
+            return Response({**serializer.data, "geom_type": geom_type, "area": area}, status=201)
+        return Response(serializer.error, status=400)
+    
+
+'''EXPORT SHAPEFILE'''
+
+@api_view(["GET"])
+def export_shapefile(request):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+    
+    layer_id = request.query_params.get("layer_id")
+    if not layer_id:
+        return Response("layer_id is required", status=400)
+
+    export_dir = os.path.join(settings.BASE_DIR, "layer_exports", "uploads")
+    file_url, status, status_msg = layer_exporter(layer_id, "shapefile", export_dir)
+
+    if status == 404:
+        return Response(status_msg, status=status)
+
+    vector_file = open(file_url, "rb")
+    response = HttpResponse(vector_file, content_type="application/force-download")
+    response["Content-Disposition"] = 'attachment; filename="%s"' % os.path.basename(file_url)
+    return response
+
+# @api_view(["GET",])
+# def export_shapefile(request):
+#     layer_id = request.data.get("projectsiteaddress_id", None)
+
+#     if not layer_id:
+#         return Response("layer_id and output_format are required", status=400)
+
+
+#     layer_instances = ProjectSiteAddress.objects.filter(id=layer_id)
+
+#     if not layer_instances.exists():
+#         return Response(f"Sorry, those layer(s) don't exist", status=404)
+    
+#     layer_instance = layer_instances.first()
+#     # Getting the actual project the layer(s) belongs to
+
+#     """
+#     Exporting starts from here
+#     """
+#     root_dir = "layer_exports/"
+#     export_dir = os.path.join(root_dir, "uploads")
+
+#     # Check if directory exists from previous call, remove if it exists then create it again
+#     root_dir = os.path.dirname(root_dir)
+#     if os.path.exists(root_dir):
+#         shutil.rmtree(root_dir)
+#     os.makedirs(export_dir)
+
+#     response_file_name = ""
+#     # file_url, status, status_msg = layer_exporter(
+#     #         instance, output_format, export_dir
+#     #     )
+    
+#     response_file_name = "layers-export.zip"
+#     payload_path = os.path.join(root_dir, os.path.splitext(response_file_name)[0])
+#     shutil.make_archive(base_name=payload_path, format="zip", root_dir=export_dir)
+#     vector_file = open(f"{payload_path}.zip", "rb")
+
+#     response = HttpResponse(vector_file, content_type="application/force-download")
+#     response["Content-Disposition"] = 'attachment; filename="%s"' % response_file_name
+#     return response

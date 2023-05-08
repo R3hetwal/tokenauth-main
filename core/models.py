@@ -1,22 +1,24 @@
 from django.db import models
-from users.models import User, Address
+# from users.models import User, Address
 from ckeditor.fields import RichTextField
 import uuid
 from datetime import date, datetime
 from django.db.models import QuerySet as Q
 from django.contrib.gis.db import models
-
+from django.contrib.gis.db import models as gismd
 
 # Create your models here.
 
 class Project(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    # owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField('users.User', on_delete=models.CASCADE, null=True, blank=True, related_name='projects_owned')
     project_name = models.CharField(max_length=255)
-    project_members = models.ManyToManyField(User, related_name='people_involved')
+    # project_members = models.ManyToManyField(User, related_name='people_involved')
     description = models.TextField(null = True, blank = True)
     start_date = models.DateField(null=True, blank=True)
     deadline = models.DateField(null=True, blank=True)
     complete = models.BooleanField(default=False)
+    
     
     @property
     def days_since_start(self):
@@ -35,9 +37,12 @@ class Project(models.Model):
         return None
     
     def __str__(self):
-        return self.project_name
+        return f"{self.project_name} ({self.pk})"
+
     
 class Department(models.Model):
+    from users.models import User
+
     department_name = models.CharField(max_length=255)
     department_head = models.ForeignKey(User, on_delete=models.CASCADE, related_name='department_head', null=True)
     members = models.ManyToManyField(User)                                                                                                                                                                
@@ -56,6 +61,8 @@ class Department(models.Model):
         return self.department_name
  
 class Document(models.Model):
+    from users.models import User
+
     document_name = models.CharField(max_length=255, default='Document')
     document_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='document_owner')
     project_name = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_name_for_document')
@@ -73,20 +80,25 @@ class AdditionalDoc(models.Model):
     additional_documents = models.ForeignKey(Document, on_delete=models.CASCADE, default=None)
     file = models.FileField(upload_to="additional_docs/")
 
-class Path(models.Model):
-    home = models.OneToOneField(Address, on_delete=models.CASCADE, related_name='home')
-    site_address = models.CharField(null=True, blank=True)
-    site_loc = models.PointField(null=True, blank=True, srid=4326)
+# class Path(models.Model):
+#     home = models.OneToOneField(Address, on_delete=models.CASCADE, related_name='home')
+#     site_address = models.CharField(null=True, blank=True)
+#     # site_loc = models.PointField(null=True, blank=True, srid=4326)
 
-    def __str__(self):
-        return self.site_address
+#     def __str__(self):
+#         return self.site_address
 
+
+class ProjectSiteAddress(models.Model):
+    geom = gismd.GeometryField(srid=4326)
+    geom_type = models.CharField(max_length=20, blank=True, null=True)
+    area = models.FloatField(null=True, blank=True)
+    project = models.ForeignKey(
+        "Project", on_delete=models.CASCADE, related_name="projectsites"
+    )
+
+
+'''For Dummy Data Creation'''
 class ProjectSite(models.Model):
-    site_name=models.CharField(max_length=255)
-    project=models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_site', null=True, blank=True)
-    site_location=models.OneToOneField(Path, on_delete=models.CASCADE, blank=True, null=True)
+    site_loc=models.PointField(blank=True, null=True)
     site_area=models.PolygonField(blank=True, null=True)
-    way = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='way', blank=True, null=True)
-
-    def __str__(self):
-        return self.site_name

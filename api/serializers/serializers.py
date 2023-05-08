@@ -1,13 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from users.models import User, Address
-from core.models import Project, Document, Department, ProjectSite, Path
+from core.models import Project, Document, Department, ProjectSite, ProjectSiteAddress
 from rest_framework.authtoken.models import Token
 import re 
 from rest_framework import status
 from rest_framework.views import Response
 from django.contrib.gis.geos import Point, LineString, GEOSGeometry
-from django.contrib.gis.db.models.functions import Transform
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
@@ -138,28 +137,24 @@ class PointSerializer(serializers.Field):
     
 class AddressSerializer(serializers.ModelSerializer):
     location = PointSerializer()
+    distance_to_home = serializers.SerializerMethodField()
+    distance_in_meters = serializers.SerializerMethodField()
     class Meta:
         model = Address
-        fields = ('home_address', 'location',)
-
-class PathSerializer(serializers.ModelSerializer):
-    home = AddressSerializer()
-    length = serializers.SerializerMethodField()
-    site_loc = PointSerializer()
-    converted_data = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Path
-        fields = ('home', 'site_address', 'site_loc', 'length', 'converted_data',)
+        fields = ('home_address', 'location', 'distance_to_home', 'distance_in_meters',)
     
-    def get_length(self, obj):
-        start_point = obj.home.location
-        end_point = obj.site_loc
-        line = LineString(start_point, end_point)
+        
+    def get_distance_to_home(self, obj):
+        user = obj.user
+        project = user.project
+        user_coords = obj.location.coords
+        project_loc = project.projectsites.filter(geom_type='point').first()
+        project_coords = project_loc.geom.coords
+        line = LineString(user_coords, project_coords)
         distance = line.length
         return distance
-    
-    def get_converted_data(self, obj):
+
+    def get_distance_in_meters(self, obj):
         
         # Convert PointField from SRID=4326(Globe, Flat Surface) to SRID=3857(Map, Plane Surface)
         """ transforms the coordinates of the start and end points from SRS 4326 (WGS84, a spherical 
@@ -169,13 +164,73 @@ class PathSerializer(serializers.ModelSerializer):
         The new point object returned by the transform() method will have the same x and y coordinates as the 
         original point, but it will be in the new spatial reference system with ID 3857"""
 
-        start_point = obj.home.location
-        end_point = obj.site_loc
-        start_point_3857 = start_point.transform(3857, clone=True)
-        end_point_3857 = end_point.transform(3857, clone=True) 
+        user = obj.user
+        project = user.project
+        start_point = obj.location.coords
+        end_point = project.projectsites.filter(geom_type='point').first().geom.coords
+        start_point_3857 = Point(start_point, srid=4326).transform(3857, clone=True)
+        end_point_3857 = Point(end_point, srid=4326).transform(3857, clone=True) 
         line = LineString(start_point_3857, end_point_3857)
         distance_3857 = line.length
         return distance_3857
+        
+
+class ProjectSiteSerializer(serializers.ModelSerializer):
+    project = serializers.SerializerMethodField()
+    class Meta:
+        model = ProjectSiteAddress
+        fields = ('geom', 'project',)
+
+    def get_project(self, obj):
+        if obj.project:
+            return obj.project.project_name
+        return None
+
+
+#UserInfo including GIS address
+class UserInfoSerializer(serializers.ModelSerializer):
+    address = AddressSerializer()
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+
+
+# class PathSerializer(serializers.ModelSerializer):
+#     home = AddressSerializer()
+#     length = serializers.SerializerMethodField()
+#     site_loc = PointSerializer()
+#     converted_data = serializers.SerializerMethodField()
+
+#     class Meta:
+#         model = Path
+#         fields = ('home', 'site_address', 'site_loc', 'length', 'converted_data',)
+    
+#     def get_length(self, obj):
+#         start_point = obj.home.location
+#         end_point = obj.site_loc
+#         line = LineString(start_point, end_point)
+#         distance = line.length
+#         return distance
+    
+#     def get_converted_data(self, obj):
+        
+#         # Convert PointField from SRID=4326(Globe, Flat Surface) to SRID=3857(Map, Plane Surface)
+#         """ transforms the coordinates of the start and end points from SRS 4326 (WGS84, a spherical 
+#         coordinate system) to SRS 3857 (Web Mercator, a projected coordinate system).
+
+#         'clone=True' argument is used to create a copy of the original object to avoid modifying it directly. 
+#         The new point object returned by the transform() method will have the same x and y coordinates as the 
+#         original point, but it will be in the new spatial reference system with ID 3857"""
+
+#         start_point = obj.home.location
+#         end_point = obj.site_loc
+#         start_point_3857 = start_point.transform(3857, clone=True)
+#         end_point_3857 = end_point.transform(3857, clone=True) 
+#         line = LineString(start_point_3857, end_point_3857)
+#         distance_3857 = line.length
+#         return distance_3857
 
     # def get_converted_data(self, obj):
 
@@ -191,34 +246,3 @@ class PathSerializer(serializers.ModelSerializer):
     #     ''' conversion factor on equatorial radius of the Earth in meters '''
     #     distance_3857 = distance_4326 * 111319.49079327357  
     #     return distance_3857
-
-class ProjectSiteSerializer(serializers.ModelSerializer):
-    area = serializers.SerializerMethodField()
-    site_location = PathSerializer()
-    project = serializers.SerializerMethodField()
-
-    class Meta:
-        model = ProjectSite
-        fields = ('project', 'area', 'site_name', 'site_location',)
-
-    def get_length(self, obj):
-        distance = obj.way.location
-        return distance
-
-    def get_area(self, obj):
-        if obj.site_area and obj.site_area.area:
-            return obj.site_area.area
-        return 0.0
-    
-    def get_project(self, obj):
-        if obj.project:
-            return obj.project.project_name
-        return None
-
-
-#UserInfo including GIS address
-class UserInfoSerializer(serializers.ModelSerializer):
-    address = AddressSerializer()
-    class Meta:
-        model = User
-        fields = '__all__'

@@ -25,7 +25,7 @@ class ProjectSummaryView(APIView):
             # project = get_object_or_404(Project, pk=id)
             summary = {
                 'name': project.project_name,
-                'members': [member.user_name for member in project.project_members.all()],
+                # 'members': [member.user_name for member in project.project_members.all()],
                 'complete': project.complete,
                 'days_since_start': project.days_since_start,
             }
@@ -52,7 +52,7 @@ class ProjectSummaryView(APIView):
                 'completed_projects': projects.filter(complete=True).count(),
                 'incomplete_projects': projects.filter(complete=False).count(),
                 'days_since_start': sum(project.days_since_start for project in projects if project.days_since_start is not None),
-                'projects': [{'name': project.project_name, 'members': [member.user_name for member in project.project_members.all()]} for project in projects]
+                'projects': [{'name': project.project_name} for project in projects]
             }
         
         return JsonResponse(summary)
