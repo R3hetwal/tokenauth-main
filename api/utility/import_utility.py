@@ -26,6 +26,6 @@ def import_layer(request):
     with open(upload_file_path, 'wb+') as fl:
         for chunk in upload_file.chunks():
             fl.write(chunk)
-
-    extract_shapefile(upload_file_path)
-    return Response({"File saved successfully!!!"}, status=200)
+    print("ENtering Extract shapefile")
+    msg, status = extract_shapefile(upload_file_path)
+    return Response(msg, status)

@@ -14,9 +14,28 @@ from rest_framework import status
 from django.http import HttpResponse
 
 def extract_shapefile(upload_file_path):
+    print("ENtering Extract shapefile")
     try:
+        print("ENtering try shapefile")
         errors = []
-        allowed_extensions = [".shp", ".shx", ".dbf",]
+        allowed_extensions = [    
+            ".shp",
+            ".shx",
+            ".dbf",
+            ".sbn",
+            ".sbx",
+            ".fbn",
+            ".fbx",
+            ".ain",
+            ".aih",
+            ".atx",
+            ".ixs",
+            ".mxs",
+            ".prj",
+            ".shp.xml",
+            ".xml",
+            ".cpg",
+        ]
         file = upload_file_path
         file_path = os.path.dirname(file)
         with zipfile.ZipFile(file, "r") as zip_ref:
@@ -37,7 +56,6 @@ def extract_shapefile(upload_file_path):
                     status=400
                 )
             zip_ref.extractall(file_path)
-
             '''The glob.glob() function returns a list of file paths that match the pattern passed to 
             it. Here ** means to match any number of directories and subdirectories. The [0] index is 
             used to select the first file path that matches the pattern, which is assumed to be the 
@@ -79,7 +97,7 @@ def extract_shapefile(upload_file_path):
 
             """set nan values to None"""
             geodataframe = geodataframe.replace(["NaN", "nan", np.nan], None)
-            print(geodataframe)
+            return ("File Saved Successfully!!!", 200)
 
     except Exception as e:
         return Response({"error occured : " + str(e)}, status=400)
