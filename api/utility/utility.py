@@ -81,7 +81,6 @@ def extract_shapefile(upload_file_path):
             """reomve id column if it exists"""
             if "id" in geodataframe.columns:
                 geodataframe.drop("id", inplace=True, axis=1)
-                # errors='ignore'
 
             #remove z dimension if exists
             '''The function being applied is force_2d(), which takes a single geometry object as an 
