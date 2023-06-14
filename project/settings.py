@@ -57,6 +57,10 @@ INSTALLED_APPS = [
     #GIS Data   
     "django.contrib.gis",
     # "import_export",
+
+    #extra
+    # "shell_plus",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -90,7 +94,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
