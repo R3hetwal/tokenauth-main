@@ -1,9 +1,13 @@
 from django.contrib import admin
-from core.models import Project, Department, Document, AdditionalDoc, ProjectSiteAddress
+from core.models import Project, Department, Document, AdditionalDoc, ProjectSiteAddress, ProjectStatus
 from django.http import HttpResponse
 import csv
 import xlwt
 from django.db import models
+
+@admin.register(ProjectStatus)
+class ProjectStatusAdmin(admin.ModelAdmin):
+    list_display = ['name', 'color', 'status', 'project', 'is_default']
 
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('id', 'department_name', 'department_head', 'creation_date', 'active_days',)
