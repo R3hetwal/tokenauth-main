@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from users.models import User, Address
-from core.models import Project, Document, Department, ProjectSite, ProjectSiteAddress
+from core.models import Project, Document, Department, ProjectSite, ProjectSiteAddress, AdditionalDoc
 from rest_framework.authtoken.models import Token
 import re 
 from rest_framework import status
@@ -112,10 +112,25 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = '__all__'
 
+class AdditionalDocSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalDoc
+        fields = ['file']
+
 class DocumentSerializer(serializers.ModelSerializer):
+    '''
+    In the DocumentSerializer, update the additional_docs field to use AdditionalDocSerializer
+    (source='additionaldoc_set', many=True, read_only=True). This setup assumes that the reverse 
+    relationship from Document to AdditionalDoc is named additionaldoc_set (the default name when
+    using a ForeignKey relationship).
+    '''
+    additional_docs = AdditionalDocSerializer(source='additionaldoc_set', many=True, read_only=True)
+
     class Meta:
         model = Document
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['id', 'document_name', 'document_owner', 'project_name', 'department_name', 'created_at', 'identifier', 'content', 'additional_docs']
+
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:

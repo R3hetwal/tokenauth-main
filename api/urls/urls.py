@@ -14,7 +14,9 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('documents/', DocumentAPIView.as_view(), name='document-list'),
+    path('documents/<int:id>', DocumentAPIView.as_view(), name='document-list'),
     path('departments/', DepartmentAPIView.as_view(), name='department-list'),
+    path('departments/<int:id>', DepartmentAPIView.as_view(), name='department-list'),
 
     path('userinfo/<str:user_name>/', UserInfoAPIView.as_view(), name='user-info'),
 

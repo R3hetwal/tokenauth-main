@@ -1,15 +1,18 @@
 from django.contrib import admin
-from core.models import Project, Department, Document, AdditionalDoc, ProjectSiteAddress
+from core.models import Project, Department, Document, AdditionalDoc, ProjectSiteAddress, ProjectStatus
 from django.http import HttpResponse
 import csv
 import xlwt
+from django.db import models
 
+@admin.register(ProjectStatus)
+class ProjectStatusAdmin(admin.ModelAdmin):
+    list_display = ['name', 'color', 'status', 'project', 'is_default']
 
-# Register your models here.
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('id', 'department_name', 'department_head', 'creation_date', 'active_days',)
     list_filter = ('project', 'department_name')
-    actions = ['export_as_csv'] 
+    actions = ['export_as_csv', 'export_as_xls'] 
 
     def export_as_csv(self, request, queryset):
         response = HttpResponse(content_type='text/csv')
@@ -24,6 +27,26 @@ class DepartmentAdmin(admin.ModelAdmin):
             writer.writerow([department.department_name, department.department_head, members, department.joined_date, projects])
         return response
     export_as_csv.short_description = "Export selected as CSV"
+    
+    def export_as_xls(self, request, queryset):
+        meta = self.model._meta
+        fields_name = [field.name for field in meta.fields]
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = f'attachment; filename={meta}.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet(f'{meta}')
+        row = 0
+        for col, column_name in enumerate(fields_name):
+            ws.write(row, col, column_name)
+        for obj in queryset:
+            row += 1
+            for col, field in enumerate(fields_name):
+                field_value = getattr(obj, field)
+                if isinstance(field_value, models.Model):
+                    field_value = str(field_value)
+                ws.write(row, col, field_value)
+        wb.save(response)
+        return response
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ['id', 'project_name', 'description', 'start_date', 'days_since_start', 'deadline', 'complete',]
@@ -41,22 +64,42 @@ class ProjectAdmin(admin.ModelAdmin):
     export_as_csv.short_description = "Export selected as CSV"
 
     def export_as_xls(self, request, queryset):
+        meta = self.model._meta
+        fields_name = [field.name for field in meta.fields]
         response = HttpResponse(content_type='application/ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="projects.xls"'
+        response['Content-Disposition'] = f'attachment; filename={meta}.xls'
         wb = xlwt.Workbook(encoding='utf-8')
-        ws = wb.add_sheet('Projects')
-        row_num = 0
-        columns = ['Project Name', 'Description', 'Start Date', 'Deadline', 'Complete']
-        for col_num, column_title in enumerate(columns):
-            ws.write(row_num, col_num, column_title)
-        for project in queryset:
-            row_num += 1
-            row = [project.project_name, project.description, project.start_date, project.deadline, project.complete]
-            for col_num, cell_value in enumerate(row):
-                ws.write(row_num, col_num, cell_value)
+        ws = wb.add_sheet(f'{meta}')
+        row = 0
+        for col, column_name in enumerate(fields_name):
+            ws.write(row, col, column_name)
+        for obj in queryset:
+            row += 1
+            for col, field in enumerate(fields_name):
+                field_value = getattr(obj, field)
+                if isinstance(field_value, models.Model):
+                    field_value = str(field_value)
+                ws.write(row, col, field_value)
         wb.save(response)
         return response
-    export_as_xls.short_description = "Export selected as XLS"
+
+    # def export_as_xls(self, request, queryset):
+    #     response = HttpResponse(content_type='application/ms-excel')
+    #     response['Content-Disposition'] = 'attachment; filename="projects.xls"'
+    #     wb = xlwt.Workbook(encoding='utf-8')
+    #     ws = wb.add_sheet('Projects')
+    #     row_num = 0
+    #     columns = ['Project Name', 'Description', 'Start Date', 'Deadline', 'Complete']
+    #     for col_num, column_title in enumerate(columns):
+    #         ws.write(row_num, col_num, column_title)
+    #     for project in queryset:
+    #         row_num += 1
+    #         row = [project.project_name, project.description, project.start_date, project.deadline, project.complete]
+    #         for col_num, cell_value in enumerate(row):
+    #             ws.write(row_num, col_num, cell_value)
+    #     wb.save(response)
+    #     return response
+    # export_as_xls.short_description = "Export selected as XLS"
 
 
 class AdditionalDocInline(admin.TabularInline):

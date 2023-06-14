@@ -8,12 +8,29 @@ from django.contrib.gis.db import models
 from django.contrib.gis.db import models as gismd
 
 # Create your models here.
+class ProjectStatus(models.Model):
+    name = models.CharField(max_length=100)
+    color = models.CharField(max_length=20)
+    status = models.BooleanField(default=True, blank=True)
+    project = models.ForeignKey("Project", related_name="status_project",
+                                on_delete=models.CASCADE, null=True, blank=True)
+    is_default = models.BooleanField(default=False, blank=True)
+    date_created = models.DateField(auto_now_add=True)
+    date_modified = models.DateField(auto_now=True)
+
+    def delete(self):
+        self.status = False
+        self.save()
+
+    def __str__(self):
+        return f"{self.name} ({self.pk})"
 
 class Project(models.Model):
     # owner = models.OneToOneField(User, on_delete=models.CASCADE)
     owner = models.OneToOneField('users.User', on_delete=models.CASCADE, null=True, blank=True, related_name='projects_owned')
     project_name = models.CharField(max_length=255)
     # project_members = models.ManyToManyField(User, related_name='people_involved')
+    projectstatus = models.ForeignKey(ProjectStatus, on_delete=models.SET_NULL, null=True, blank=True, related_name='projects')
     description = models.TextField(null = True, blank = True)
     start_date = models.DateField(null=True, blank=True)
     deadline = models.DateField(null=True, blank=True)
@@ -39,7 +56,6 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.project_name} ({self.pk})"
 
-    
 class Department(models.Model):
     from users.models import User
 

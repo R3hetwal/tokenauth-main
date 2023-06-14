@@ -143,6 +143,14 @@ class DepartmentAPIView(APIView):
 
 #API to fetch UserInfo
 class UserInfoAPIView(APIView):
+    '''
+    The get_queryset() method retrieves the user_name from the URL kwargs and filters the User objects based on the provided user_name.
+    The get() method is called when a GET request is made to the API endpoint. It retrieves the user from the queryset and checks if the 
+    user exists. If the user exists, it filters projects, departments, and documents related to that user. Then it creates a dictionary 
+    containing the serialized data for the user, projects, departments, and documents.
+    Finally, it returns a response with the serialized data if the user is found, or an error response with HTTP 404 status if the user 
+    is not found.
+    '''
     serializer_class = UserInfoSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)
