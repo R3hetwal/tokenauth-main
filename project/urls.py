@@ -28,6 +28,7 @@ from api.viewsets.userstatsviewsets import UserStatsView
 from api.viewsets.projectstats import ProjectSummaryView
 from api.utility.import_utility import import_layer
 
+app_name = 'http'  # Set the app_name for the http namespace
 
 urlpatterns = [
     path('admin/', admin.site.urls),
