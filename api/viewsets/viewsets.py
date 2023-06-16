@@ -70,7 +70,7 @@ class ProjectViewSet(viewsets.ViewSet):
         if serializer_class.is_valid():
             serializer_class.save()
             # update_user_info.send(sender=Project, user=request.user, action="partial_update")
-            return Response({'msg':'Partial Data Updated'})
+            return Response({'msg':'Partial Data Updated'}, status=status.HTTP_200_OK)
         return Response(serializer_class.errors)
     
     def destroy(self, request, pk):
@@ -78,7 +78,7 @@ class ProjectViewSet(viewsets.ViewSet):
         queryset = Project.objects.get(pk=id)
         queryset.delete()
         # update_user_info.send(sender=Project, user=request.user, action="delete")
-        return Response({'msg':'Data Deleted'})
+        return Response({'msg':'Data Deleted'}, status=status.HTTP_204_NO_CONTENT)
     
 class DocumentAPIView(APIView):
     authentication_classes = [TokenAuthentication]
