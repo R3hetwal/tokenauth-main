@@ -16,7 +16,7 @@ urlpatterns = [
     path('documents/', DocumentAPIView.as_view(), name='document-list'),
     path('documents/<int:id>', DocumentAPIView.as_view(), name='document-list'),
     path('departments/', DepartmentAPIView.as_view(), name='department-list'),
-    path('departments/<int:id>', DepartmentAPIView.as_view(), name='department-list'),
+    path('departments/<int:pk>', DepartmentAPIView.as_view(), name='department-list'),
 
     path('userinfo/<str:user_name>/', UserInfoAPIView.as_view(), name='user-info'),
 
