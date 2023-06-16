@@ -121,3 +121,6 @@ class User(AbstractBaseUser, PermissionsMixin, SoftDeleteModel): #use default pe
             
     class Meta:
         db_table = "user"
+
+    def __str__(self):
+        return f"{self.email} ({self.pk})"
