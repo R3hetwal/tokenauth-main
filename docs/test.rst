@@ -4,18 +4,18 @@ test package
 Submodules
 ----------
 
-test.test\_add\_items module
-----------------------------
-
-.. automodule:: test.test_add_items
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 test.test\_departmentapi module
 -------------------------------
 
 .. automodule:: test.test_departmentapi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+test.test\_learn module
+-----------------------
+
+.. automodule:: test.test_learn
    :members:
    :undoc-members:
    :show-inheritance:

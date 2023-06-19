@@ -26,8 +26,11 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 autodoc_default_flags = ['members']
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**/api/**', '**/core/**']
-
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_tree = {
+    'api': 'api',
+    'core': 'core',
+}
 
 
 # -- Options for HTML output -------------------------------------------------

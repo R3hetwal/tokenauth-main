@@ -28,25 +28,23 @@ from rest_framework.authtoken.models import Token
 class DepartmentAPIViewTestCase(APITestCase):
     def setUp(self):
         """
-        Set up the necessary objects and credentials for testing.
+         Set up the necessary objects and credentials for testing.
 
-        This method creates a test user, a token associated with the user, a test project,
-        and a test department. The user is set as the department head, and is added as a
-        member of the department. The project is added to the department. The client's
-        credentials are set with the authorization token.
+        This method initializes the APIRequestFactory for creating test requests.
+        It creates a user with the specified email and user_name using the User model's `create` method.
+        The method also generates a token for the user using the Token model's `create` method.
+
+        Additionally, it creates a test project with the specified project_name and description using the 
+        Project model's `create` method.
+
+        Lastly, the method sets the authentication credentials for the test client by adding the token to the
+        'Authorization' header.
 
         """
         self.factory = APIRequestFactory()
         self.user = User.objects.create(email='detective@gmail.com', user_name='thedetective')
         self.token = Token.objects.create(user=self.user)
         self.project = Project.objects.create(project_name='Test Project', description='Test Description')
-        # self.department = Department.objects.create(
-        #     department_name='Test Department',
-        #     department_head=self.user,
-        #     creation_date=date.today()
-        # )
-        # self.department.members.add(self.user)
-        # self.department.project.add(self.project)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
     def test_get(self):
@@ -62,7 +60,6 @@ class DepartmentAPIViewTestCase(APITestCase):
         matches the serialized data.
 
         """
-
         url = '/api/v1/departments/'
         request = self.factory.get(url)
         response = self.client.get(url)
@@ -88,11 +85,6 @@ class DepartmentAPIViewTestCase(APITestCase):
         department head, members, creation date, and associated project, match the expected values.
 
         """
-        # department = Department.objects.create(
-        #     department_name='Test Department',
-        #     department_head=self.user,
-        #     creation_date=date.today()
-        # )
         data = {
             'department_name': 'New Department',
             'department_head': self.user.id,
