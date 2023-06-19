@@ -56,29 +56,30 @@ Each project can have multiple documents with unique identifiers.
 
   ### Command to run test cases
   * For pytest:
-  ```sh
-    $ pytest test/test_learn.py
-  ```
+     ```sh
+       $ pytest test/test_learn.py
+     ```
 
   * For django test:
-  Searches for every test available
-  ```sh
-    $ python manage.py test
-  ```
-
-  Runs test in test folder
-  ```sh
-    $ python manage.py test test
-  ```
-
-  To run test in particular file only
-  ```sh
-    $ python manage.py test test.test_registration
-    $ python manage.py test test.test_login
-    $ python manage.py test test.test_projectapi
-    $ python manage.py test test.test_departmentapi
-    $ python manage.py test test.test_signal
-    $ python manage.py test test.test_learn
-  ```
+    
+     Searches for every test available
+     ```sh
+       $ python manage.py test
+     ```
+   
+     Runs test in test folder
+     ```sh
+       $ python manage.py test test
+     ```
+   
+     To run test in particular file only
+     ```sh
+       $ python manage.py test test.test_registration
+       $ python manage.py test test.test_login
+       $ python manage.py test test.test_projectapi
+       $ python manage.py test test.test_departmentapi
+       $ python manage.py test test.test_signal
+       $ python manage.py test test.test_learn
+     ```
   
   
