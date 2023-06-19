@@ -66,25 +66,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for test.test_login</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APIClient</span>
-<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
-
-<div class="viewcode-block" id="test_login"><a class="viewcode-back" href="../../test.html#test.test_login.test_login">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">test</span>
-<span class="k">def</span> <span class="nf">test_login</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Login Successful !!!&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="testCalculation"><a class="viewcode-back" href="../../test.html#test.test_login.testCalculation">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">mul</span>
-<span class="k">def</span> <span class="nf">testCalculation</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span></div>
-
-<div class="viewcode-block" id="testLogoff"><a class="viewcode-back" href="../../test.html#test.test_login.testLogoff">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">regression</span>
-<span class="k">def</span> <span class="nf">testLogoff</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logging out successfully!!!&quot;</span><span class="p">)</span></div>
-
-
-<span class="c1">##################################  LOGIN TEST  ####################################################</span>
-<span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APITestCase</span><span class="p">,</span> <span class="n">APIClient</span>
+<span></span><span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APITestCase</span><span class="p">,</span> <span class="n">APIClient</span>
 <span class="kn">from</span> <span class="nn">rest_framework.authtoken.models</span> <span class="kn">import</span> <span class="n">Token</span>
 <span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
 <span class="kn">from</span> <span class="nn">users.models</span> <span class="kn">import</span> <span class="n">User</span>

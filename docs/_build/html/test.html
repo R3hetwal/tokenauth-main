@@ -46,8 +46,11 @@
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-test.test_add_items">test.test_add_items module</a><ul>
 <li><a class="reference internal" href="#test.test_add_items.testAddition"><code class="docutils literal notranslate"><span class="pre">testAddition()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_add_items.testCalculation"><code class="docutils literal notranslate"><span class="pre">testCalculation()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_add_items.testLogoff"><code class="docutils literal notranslate"><span class="pre">testLogoff()</span></code></a></li>
 <li><a class="reference internal" href="#test.test_add_items.testMultiplication"><code class="docutils literal notranslate"><span class="pre">testMultiplication()</span></code></a></li>
 <li><a class="reference internal" href="#test.test_add_items.test_add"><code class="docutils literal notranslate"><span class="pre">test_add()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_add_items.test_login"><code class="docutils literal notranslate"><span class="pre">test_login()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-test.test_departmentapi">test.test_departmentapi module</a><ul>
@@ -67,9 +70,6 @@
 <li><a class="reference internal" href="#test.test_login.LoginTestCase.test_login"><code class="docutils literal notranslate"><span class="pre">LoginTestCase.test_login()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test.test_login.testCalculation"><code class="docutils literal notranslate"><span class="pre">testCalculation()</span></code></a></li>
-<li><a class="reference internal" href="#test.test_login.testLogoff"><code class="docutils literal notranslate"><span class="pre">testLogoff()</span></code></a></li>
-<li><a class="reference internal" href="#test.test_login.test_login"><code class="docutils literal notranslate"><span class="pre">test_login()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-test.test_projectapi">test.test_projectapi module</a><ul>
@@ -146,10 +146,42 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="test.test_add_items.testCalculation">
+<span class="sig-prename descclassname"><span class="pre">test.test_add_items.</span></span><span class="sig-name descname"><span class="pre">testCalculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_add_items.html#testCalculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_add_items.testCalculation" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for multiplication calculation.</p>
+<p>This test verifies the multiplication calculation by asserting that multiplying 2 by 3 equals 6.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.mul</cite>: This test is marked with the “mul” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_add_items.testLogoff">
+<span class="sig-prename descclassname"><span class="pre">test.test_add_items.</span></span><span class="sig-name descname"><span class="pre">testLogoff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_add_items.html#testLogoff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_add_items.testLogoff" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for logoff functionality.</p>
+<p>This test verifies the logoff functionality by printing a success message indicating successful logoff.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.regression</cite>: This test is marked with the “regression” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="test.test_add_items.testMultiplication">
 <span class="sig-prename descclassname"><span class="pre">test.test_add_items.</span></span><span class="sig-name descname"><span class="pre">testMultiplication</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_add_items.html#testMultiplication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_add_items.testMultiplication" title="Permalink to this definition"></a></dt>
 <dd><p>Test case for multiplication.</p>
-<p>This test verifies that multiplying 11 by 11 results in 121.</p>
+<p>This test verifies the multiplication operation by checking if multiplying 11 by 11 equals 121.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.mul</cite>: This test is marked with the “mul” marker.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -157,6 +189,19 @@
 <span class="sig-prename descclassname"><span class="pre">test.test_add_items.</span></span><span class="sig-name descname"><span class="pre">test_add</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_add_items.html#test_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_add_items.test_add" title="Permalink to this definition"></a></dt>
 <dd><p>Test case for addition.</p>
 <p>This test verifies that adding 15 and 15 does not result in 31.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_add_items.test_login">
+<span class="sig-prename descclassname"><span class="pre">test.test_add_items.</span></span><span class="sig-name descname"><span class="pre">test_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_add_items.html#test_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_add_items.test_login" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for login functionality.</p>
+<p>This test verifies the login functionality by printing a message indicating successful login.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.test</cite>: This test is marked with the “test” marker.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -258,21 +303,6 @@ It also verifies that the response data contains the expected token key.</p>
 </dd></dl>
 
 </dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="test.test_login.testCalculation">
-<span class="sig-prename descclassname"><span class="pre">test.test_login.</span></span><span class="sig-name descname"><span class="pre">testCalculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#testCalculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.testCalculation" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="test.test_login.testLogoff">
-<span class="sig-prename descclassname"><span class="pre">test.test_login.</span></span><span class="sig-name descname"><span class="pre">testLogoff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#testLogoff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.testLogoff" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="test.test_login.test_login">
-<span class="sig-prename descclassname"><span class="pre">test.test_login.</span></span><span class="sig-name descname"><span class="pre">test_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#test_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.test_login" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
 
 </section>
 <section id="module-test.test_projectapi">
