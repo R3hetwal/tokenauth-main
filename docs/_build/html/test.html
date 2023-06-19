@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test package &mdash; Test  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Test
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">test package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-test.test_departmentapi">test.test_departmentapi module</a><ul>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase</span></code></a><ul>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase.setUp()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_delete"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase.test_delete()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_get"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase.test_get()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_post"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase.test_post()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_put"><code class="docutils literal notranslate"><span class="pre">DepartmentAPIViewTestCase.test_put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test.test_learn">test.test_learn module</a><ul>
+<li><a class="reference internal" href="#test.test_learn.testAddition"><code class="docutils literal notranslate"><span class="pre">testAddition()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_learn.testCalculation"><code class="docutils literal notranslate"><span class="pre">testCalculation()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_learn.testLogoff"><code class="docutils literal notranslate"><span class="pre">testLogoff()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_learn.testMultiplication"><code class="docutils literal notranslate"><span class="pre">testMultiplication()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_learn.test_add"><code class="docutils literal notranslate"><span class="pre">test_add()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_learn.test_login"><code class="docutils literal notranslate"><span class="pre">test_login()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test.test_login">test.test_login module</a><ul>
+<li><a class="reference internal" href="#test.test_login.LoginTestCase"><code class="docutils literal notranslate"><span class="pre">LoginTestCase</span></code></a><ul>
+<li><a class="reference internal" href="#test.test_login.LoginTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">LoginTestCase.setUp()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_login.LoginTestCase.test_login"><code class="docutils literal notranslate"><span class="pre">LoginTestCase.test_login()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test.test_projectapi">test.test_projectapi module</a><ul>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase</span></code></a><ul>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.setUp()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_create"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_create()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_delete"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_delete()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_list"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_list()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_partial_update"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_partial_update()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_retrieve"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_retrieve()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_projectapi.ProjectViewSetTestCase.test_update"><code class="docutils literal notranslate"><span class="pre">ProjectViewSetTestCase.test_update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test.test_registration">test.test_registration module</a><ul>
+<li><a class="reference internal" href="#test.test_registration.UserRegistrationViewSetTest"><code class="docutils literal notranslate"><span class="pre">UserRegistrationViewSetTest</span></code></a><ul>
+<li><a class="reference internal" href="#test.test_registration.UserRegistrationViewSetTest.setUp"><code class="docutils literal notranslate"><span class="pre">UserRegistrationViewSetTest.setUp()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_registration.UserRegistrationViewSetTest.test_user_registration"><code class="docutils literal notranslate"><span class="pre">UserRegistrationViewSetTest.test_user_registration()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_registration.UserRegistrationViewSetTest.test_user_registration_invalid_data"><code class="docutils literal notranslate"><span class="pre">UserRegistrationViewSetTest.test_user_registration_invalid_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test.test_signal">test.test_signal module</a><ul>
+<li><a class="reference internal" href="#test.test_signal.ProjectSignalTestCase"><code class="docutils literal notranslate"><span class="pre">ProjectSignalTestCase</span></code></a><ul>
+<li><a class="reference internal" href="#test.test_signal.ProjectSignalTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">ProjectSignalTestCase.setUp()</span></code></a></li>
+<li><a class="reference internal" href="#test.test_signal.ProjectSignalTestCase.test_assign_default_project_status"><code class="docutils literal notranslate"><span class="pre">ProjectSignalTestCase.test_assign_default_project_status()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-test">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Test</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">test package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/test.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-package">
+<h1>test package<a class="headerlink" href="#test-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-test.test_departmentapi">
+<span id="test-test-departmentapi-module"></span><h2>test.test_departmentapi module<a class="headerlink" href="#module-test.test_departmentapi" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test.test_departmentapi.</span></span><span class="sig-name descname"><span class="pre">DepartmentAPIViewTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase.setUp" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Set up the necessary objects and credentials for testing.</p>
+</div></blockquote>
+<p>This method initializes the APIRequestFactory for creating test requests.
+It creates a user with the specified email and user_name using the User model’s <cite>create</cite> method.
+The method also generates a token for the user using the Token model’s <cite>create</cite> method.</p>
+<p>Additionally, it creates a test project with the specified project_name and description using the 
+Project model’s <cite>create</cite> method.</p>
+<p>Lastly, the method sets the authentication credentials for the test client by adding the token to the
+‘Authorization’ header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase.test_delete">
+<span class="sig-name descname"><span class="pre">test_delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase.test_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_delete" title="Permalink to this definition"></a></dt>
+<dd><p>Test the DELETE request for deleting a specific department.</p>
+<p>This method sends a DELETE request to the ‘/api/v1/departments/{department_id}/’ URL using the test client.
+It retrieves the department ID from the <cite>self.department</cite> attribute, assuming it has been previously set up.</p>
+<p>The method asserts that the response status code is HTTP 204 NO CONTENT, indicating a successful deletion.</p>
+<p>Additionally, it verifies that the department is no longer present in the database by attempting
+to retrieve it again.</p>
+<p>It uses the <cite>Department.DoesNotExist</cite> exception to assert that the department no longer exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase.test_get">
+<span class="sig-name descname"><span class="pre">test_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase.test_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_get" title="Permalink to this definition"></a></dt>
+<dd><p>Test the GET request for retrieving departments.</p>
+<p>This method sends a GET request to the ‘/api/v1/departments/’ URL using the test client.
+It then asserts that the response status code is HTTP 200 OK.</p>
+<p>If needed, we can verify the retrieved departments data by comparing it with the serialized
+data obtained from the DepartmentSerializer. The method retrieves all departments from the
+database, serializes them using the DepartmentSerializer, and asserts that the response data
+matches the serialized data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase.test_post">
+<span class="sig-name descname"><span class="pre">test_post</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase.test_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_post" title="Permalink to this definition"></a></dt>
+<dd><p>Test the POST request for creating a new department.</p>
+<p>This method sends a POST request to the ‘/api/v1/departments/’ URL using the test client.
+It includes the necessary data for creating a new department, such as the department name,
+department head, members, creation date, and associated project.</p>
+<p>After the request is sent, the method asserts that the response status code is HTTP 201 CREATED.</p>
+<p>Furthermore, it verifies that the department is correctly saved in the database by retrieving it
+and performing several assertions. It checks that the department’s attributes, such as the
+department head, members, creation date, and associated project, match the expected values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_departmentapi.DepartmentAPIViewTestCase.test_put">
+<span class="sig-name descname"><span class="pre">test_put</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_departmentapi.html#DepartmentAPIViewTestCase.test_put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_departmentapi.DepartmentAPIViewTestCase.test_put" title="Permalink to this definition"></a></dt>
+<dd><p>Test the PUT request for updating a department.</p>
+<p>This method sends a PUT request to the ‘/api/v1/departments/{department_id}/’ URL
+using the test client. It includes the necessary data for updating the department,
+such as the department name, department head, members, creation date, and associated project.</p>
+<p>After the request is sent, the method asserts that the response status code is HTTP 200 OK.</p>
+<p>Furthermore, it verifies that the department is correctly updated in the database by
+retrieving it and performing several assertions. It checks that the department’s attributes,
+such as the department name, department head, members, creation date, and associated project,
+match the updated values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-test.test_learn">
+<span id="test-test-learn-module"></span><h2>test.test_learn module<a class="headerlink" href="#module-test.test_learn" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.testAddition">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">testAddition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#testAddition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.testAddition" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for addition.</p>
+<p>This test verifies that adding 2 and 10 results in 12.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.testCalculation">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">testCalculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#testCalculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.testCalculation" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for multiplication calculation.</p>
+<p>This test verifies the multiplication calculation by asserting that multiplying 2 by 3 equals 6.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.mul</cite>: This test is marked with the “mul” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.testLogoff">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">testLogoff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#testLogoff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.testLogoff" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for logoff functionality.</p>
+<p>This test verifies the logoff functionality by printing a success message indicating successful logoff.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.regression</cite>: This test is marked with the “regression” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.testMultiplication">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">testMultiplication</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#testMultiplication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.testMultiplication" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for multiplication.</p>
+<p>This test verifies the multiplication operation by checking if multiplying 11 by 11 equals 121.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.mul</cite>: This test is marked with the “mul” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.test_add">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">test_add</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#test_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.test_add" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for addition.</p>
+<p>This test verifies that adding 15 and 15 does not result in 31.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_learn.test_login">
+<span class="sig-prename descclassname"><span class="pre">test.test_learn.</span></span><span class="sig-name descname"><span class="pre">test_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_learn.html#test_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_learn.test_login" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for login functionality.</p>
+<p>This test verifies the login functionality by printing a message indicating successful login.</p>
+<dl class="simple">
+<dt>Marker:</dt><dd><ul class="simple">
+<li><p><cite>&#64;pytest.mark.test</cite>: This test is marked with the “test” marker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-test.test_login">
+<span id="test-test-login-module"></span><h2>test.test_login module<a class="headerlink" href="#module-test.test_login" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="test.test_login.LoginTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test.test_login.</span></span><span class="sig-name descname"><span class="pre">LoginTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#LoginTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.LoginTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_login.LoginTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#LoginTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.LoginTestCase.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Set up the necessary objects and credentials for testing.</p>
+<p>This method initializes the APIClient for making test API requests.
+It also sets up various attributes such as email, password, user_name, first_name, and token.</p>
+<p>The method creates a user with the specified email, password, user_name, and first_name using the User model’s
+<cite>create_user</cite> method. Additional fields can be added if required.</p>
+<p>It generates a token for the user using the Token model’s <cite>create</cite> method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_login.LoginTestCase.test_login">
+<span class="sig-name descname"><span class="pre">test_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_login.html#LoginTestCase.test_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_login.LoginTestCase.test_login" title="Permalink to this definition"></a></dt>
+<dd><p>Test the login functionality by sending a POST request to the login endpoint.</p>
+<p>This method sends a POST request to the ‘/users/v1/login/’ URL using the test client.
+It includes the user’s email and password in the request data.</p>
+<p>The method asserts that the response status code is HTTP 200 OK, indicating a successful login.
+It also verifies that the response data contains the expected token key.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-test.test_projectapi">
+<span id="test-test-projectapi-module"></span><h2>test.test_projectapi module<a class="headerlink" href="#module-test.test_projectapi" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test.test_projectapi.</span></span><span class="sig-name descname"><span class="pre">ProjectViewSetTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Set up the necessary objects and credentials for testing.</p>
+<p>This method initializes the APIRequestFactory for creating test requests.
+It creates a test user with the specified email and username.
+A token associated with the user is also created.
+The client’s credentials are set with the authorization token.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_create">
+<span class="sig-name descname"><span class="pre">test_create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_create" title="Permalink to this definition"></a></dt>
+<dd><p>Test the POST request for creating a new project.</p>
+<p>This method creates a POST request using the APIRequestFactory for the ‘/api/v1/projects/’ URL.
+It includes the necessary data for creating a new project, such as the project name and description.
+The method then sends a POST request using the test client with the provided data.</p>
+<p>The method asserts that the response status code is HTTP 201 CREATED, indicating a successful creation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_delete">
+<span class="sig-name descname"><span class="pre">test_delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_delete" title="Permalink to this definition"></a></dt>
+<dd><p>Test the DELETE request for deleting a specific project.</p>
+<p>This method creates a test project with the specified project name and description.
+It constructs the URL for deleting the project using the project’s ID.
+The method then sends a DELETE request using the test client to the constructed URL.</p>
+<p>The method asserts that the response status code is HTTP 204 NO CONTENT, indicating a successful 
+deletion.</p>
+<p>Additionally, it verifies that the project is actually deleted by attempting to retrieve it again.
+It uses the <cite>Project.DoesNotExist</cite> exception to assert that the project no longer exists in the 
+database.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_list">
+<span class="sig-name descname"><span class="pre">test_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_list" title="Permalink to this definition"></a></dt>
+<dd><p>Test the GET request for retrieving a list of projects.</p>
+<p>This method creates a GET request using the APIRequestFactory for the ‘/api/v1/projects/’ URL.
+It also sends a GET request using the test client.</p>
+<p>The method asserts that the response status code is HTTP 200 OK, indicating a successful request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_partial_update">
+<span class="sig-name descname"><span class="pre">test_partial_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_partial_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_partial_update" title="Permalink to this definition"></a></dt>
+<dd><p>Test the PUT request for updating a specific project.</p>
+<p>This method creates a test project with the specified project name and description.
+It constructs the URL for updating the project using the project’s ID.
+The method then creates a PUT request using the APIRequestFactory and sends another PUT
+request using the test client with the provided data for updating the project.</p>
+<p>The method asserts that the response status code is HTTP 200 OK, indicating a successful update.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_retrieve">
+<span class="sig-name descname"><span class="pre">test_retrieve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_retrieve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_retrieve" title="Permalink to this definition"></a></dt>
+<dd><p>Test the GET request for retrieving a specific project.</p>
+<p>This method creates a test project with the specified project name and description.
+It constructs the URL for retrieving the project using the project’s ID.
+The method then creates a GET request using the APIRequestFactory and sends another GET
+request using the test client.</p>
+<p>The method asserts that the response status code is HTTP 200 OK, indicating a successful request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_projectapi.ProjectViewSetTestCase.test_update">
+<span class="sig-name descname"><span class="pre">test_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_projectapi.html#ProjectViewSetTestCase.test_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_projectapi.ProjectViewSetTestCase.test_update" title="Permalink to this definition"></a></dt>
+<dd><p>Test the PUT request for updating a specific project.</p>
+<p>This method creates a test project with the specified project name and description.
+It constructs the URL for updating the project using the project’s ID.
+The method then creates a PUT request using the APIRequestFactory and sends another PUT
+request using the test client with the provided data for updating the project.</p>
+<p>The method asserts that the response status code is HTTP 200 OK, indicating a successful update.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-test.test_registration">
+<span id="test-test-registration-module"></span><h2>test.test_registration module<a class="headerlink" href="#module-test.test_registration" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="test.test_registration.UserRegistrationViewSetTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test.test_registration.</span></span><span class="sig-name descname"><span class="pre">UserRegistrationViewSetTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_registration.html#UserRegistrationViewSetTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_registration.UserRegistrationViewSetTest" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_registration.UserRegistrationViewSetTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_registration.html#UserRegistrationViewSetTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_registration.UserRegistrationViewSetTest.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Set up the necessary objects and credentials for testing.</p>
+<p>This method initializes the APIClient for making test API requests and the RequestFactory for 
+creating mock requests.</p>
+<p>It sets the <cite>client</cite> attribute as an instance of <cite>APIClient</cite> for making HTTP requests during the 
+tests.
+The <cite>factory</cite> attribute is set as an instance of <cite>RequestFactory</cite> for creating mock requests.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_registration.UserRegistrationViewSetTest.test_user_registration">
+<span class="sig-name descname"><span class="pre">test_user_registration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_registration.html#UserRegistrationViewSetTest.test_user_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_registration.UserRegistrationViewSetTest.test_user_registration" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for user registration.</p>
+<p>This test verifies the registration process for a new user by making a POST request to the registration 
+endpoint.</p>
+<p>It constructs the URL for the registration endpoint and prepares the data payload containing the necessary 
+user information.
+The data payload includes fields such as email, password, confirm_password, user_name, first_name, last_name, 
+and contact.</p>
+<p>It creates a mock POST request using the <cite>RequestFactory</cite> and sends the request using the <cite>client.post</cite> method.
+The response from the registration endpoint is captured and printed for debugging purposes.</p>
+<p>It asserts the expected status code of the response, which is <cite>status.HTTP_200_OK</cite>.
+It also verifies the presence of specific keys in the response data dictionary, such as ‘status’, ‘payload’, 
+‘token’, and ‘msg’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_registration.UserRegistrationViewSetTest.test_user_registration_invalid_data">
+<span class="sig-name descname"><span class="pre">test_user_registration_invalid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_registration.html#UserRegistrationViewSetTest.test_user_registration_invalid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_registration.UserRegistrationViewSetTest.test_user_registration_invalid_data" title="Permalink to this definition"></a></dt>
+<dd><p>Test case for user registration with invalid data.</p>
+<p>This test verifies the behavior of the user registration endpoint when invalid data is provided.</p>
+<p>It constructs the URL for the registration endpoint and prepares the invalid data payload.
+The invalid data payload includes fields such as ‘username’, ‘email’, and ‘password’.</p>
+<p>It sends a POST request to the registration endpoint using the <cite>client.post</cite> method with the 
+invalid data payload.
+The response from the registration endpoint is captured.</p>
+<p>It asserts the expected status code of the response, which is <cite>status.HTTP_400_BAD_REQUEST</cite>.
+This ensures that the registration endpoint properly handles the invalid data and returns an 
+appropriate error response.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-test.test_signal">
+<span id="test-test-signal-module"></span><h2>test.test_signal module<a class="headerlink" href="#module-test.test_signal" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="test.test_signal.ProjectSignalTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test.test_signal.</span></span><span class="sig-name descname"><span class="pre">ProjectSignalTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_signal.html#ProjectSignalTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_signal.ProjectSignalTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_signal.ProjectSignalTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_signal.html#ProjectSignalTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_signal.ProjectSignalTestCase.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Set up the necessary test data.</p>
+<p>This method creates a test user with the following information:
+- Email: <a class="reference external" href="mailto:'detective01&#37;&#52;&#48;gmail&#46;com">‘detective01<span>&#64;</span>gmail<span>&#46;</span>com</a>’
+- Username: ‘thedetective01’
+- First name: ‘Waston’
+- Password: ‘Waston1212*’</p>
+<p>This test user is assigned to the instance variable ‘self.user’ for use in test cases.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test.test_signal.ProjectSignalTestCase.test_assign_default_project_status">
+<span class="sig-name descname"><span class="pre">test_assign_default_project_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test/test_signal.html#ProjectSignalTestCase.test_assign_default_project_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.test_signal.ProjectSignalTestCase.test_assign_default_project_status" title="Permalink to this definition"></a></dt>
+<dd><p>Create a test project and verify default project statuses.</p>
+<p>This block of code performs the following actions:
+1. Creates a test project with the project name ‘Test Project’ and the owner set to ‘self.user’.
+2. Asserts that there is only one project object in the database.
+3. Asserts that the number of project status objects in the database is equal to the length of the</p>
+<blockquote>
+<div><p>‘DEFAULT_PROJECT_STATUS’ list.</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Iterates over each default project status in the ‘DEFAULT_PROJECT_STATUS’ list and verifies that 
+a corresponding project status object exists in the database for the created project.</p></li>
+</ol>
+<p>Note: The ‘DEFAULT_PROJECT_STATUS’ list contains dictionaries with the following keys: ‘name’, ‘color’, and ‘is_default’.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-test">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-test" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, RB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

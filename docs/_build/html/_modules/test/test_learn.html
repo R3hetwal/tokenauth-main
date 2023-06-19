@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test.test_learn &mdash; Test  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Test
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Test</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">test.test_learn</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for test.test_learn</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Unit tests for mathematical operations and login functionality.</span>
+
+<span class="sd">The following test functions are included in this module:</span>
+
+<span class="sd">    - testMultiplication(): Test case for multiplication. This test verifies that multiplying 11 by 11 </span>
+<span class="sd">                            results in 121.</span>
+
+<span class="sd">    - testAddition(): Test case for addition. This test verifies that adding 2 and 10 results in 12.</span>
+
+<span class="sd">    - test_add(): Test case for addition. This test verifies that adding 15 and 15 does not result in 31.</span>
+
+<span class="sd">    - test_login(): Test the login functionality. This test prints a message indicating successful login.</span>
+
+<span class="sd">    - testCalculation(): Test a calculation. This test asserts that the result of multiplying 2 and 3 is </span>
+<span class="sd">                         6.</span>
+
+<span class="sd">    - testLogoff(): Test the logoff functionality. This test prints a message indicating successful logoff.</span>
+
+<span class="sd">These tests cover different scenarios and functionalities. They are marked with specific markers using the `pytest.mark`</span>
+<span class="sd">decorator. The markers provide additional metadata for categorizing and organizing the tests, allowing selective test</span>
+<span class="sd">execution based on markers.</span>
+
+<span class="sd">Markers:</span>
+<span class="sd">    - `@pytest.mark.mul`: These tests are marked with the &quot;mul&quot; marker.</span>
+
+<span class="sd">    - `@pytest.mark.test`: This test is marked with the &quot;test&quot; marker.</span>
+
+<span class="sd">    - `@pytest.mark.regression`: This test is marked with the &quot;regression&quot; marker.</span>
+
+<span class="sd">Note: The markers can be used with pytest&#39;s command-line options to run specific subsets of tests.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="testMultiplication"><a class="viewcode-back" href="../../test.html#test.test_learn.testMultiplication">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">mul</span>
+<span class="k">def</span> <span class="nf">testMultiplication</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for multiplication.</span>
+
+<span class="sd">    This test verifies the multiplication operation by checking if multiplying 11 by 11 equals 121.</span>
+
+<span class="sd">    Marker:</span>
+<span class="sd">        - `@pytest.mark.mul`: This test is marked with the &quot;mul&quot; marker.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">11</span> <span class="o">*</span> <span class="mi">11</span> <span class="o">==</span> <span class="mi">121</span></div>
+
+<div class="viewcode-block" id="testAddition"><a class="viewcode-back" href="../../test.html#test.test_learn.testAddition">[docs]</a><span class="k">def</span> <span class="nf">testAddition</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for addition.</span>
+
+<span class="sd">    This test verifies that adding 2 and 10 results in 12.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">12</span></div>
+
+<div class="viewcode-block" id="test_add"><a class="viewcode-back" href="../../test.html#test.test_learn.test_add">[docs]</a><span class="k">def</span> <span class="nf">test_add</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for addition.</span>
+
+<span class="sd">    This test verifies that adding 15 and 15 does not result in 31.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">15</span> <span class="o">!=</span> <span class="mi">31</span></div>
+
+<div class="viewcode-block" id="test_login"><a class="viewcode-back" href="../../test.html#test.test_learn.test_login">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">test</span>
+<span class="k">def</span> <span class="nf">test_login</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for login functionality.</span>
+
+<span class="sd">    This test verifies the login functionality by printing a message indicating successful login.</span>
+
+<span class="sd">    Marker:</span>
+<span class="sd">        - `@pytest.mark.test`: This test is marked with the &quot;test&quot; marker.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Login Successful !!!&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testCalculation"><a class="viewcode-back" href="../../test.html#test.test_learn.testCalculation">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">mul</span>
+<span class="k">def</span> <span class="nf">testCalculation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for multiplication calculation.</span>
+
+<span class="sd">    This test verifies the multiplication calculation by asserting that multiplying 2 by 3 equals 6.</span>
+
+<span class="sd">    Marker:</span>
+<span class="sd">        - `@pytest.mark.mul`: This test is marked with the &quot;mul&quot; marker.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span></div>
+
+<div class="viewcode-block" id="testLogoff"><a class="viewcode-back" href="../../test.html#test.test_learn.testLogoff">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">regression</span>
+<span class="k">def</span> <span class="nf">testLogoff</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for logoff functionality.</span>
+
+<span class="sd">    This test verifies the logoff functionality by printing a success message indicating successful logoff.</span>
+
+<span class="sd">    Marker:</span>
+<span class="sd">        - `@pytest.mark.regression`: This test is marked with the &quot;regression&quot; marker.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logging out successfully!!!&quot;</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, RB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

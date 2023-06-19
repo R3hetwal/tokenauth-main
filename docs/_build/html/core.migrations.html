@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.migrations package &mdash; Test  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Test
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">core.migrations package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-core.migrations.0001_initial">core.migrations.0001_initial module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-migrations-0002-initial-module">core.migrations.0002_initial module</a></li>
+<li><a class="reference internal" href="#module-core.migrations.0003_projectsite_way">core.migrations.0003_projectsite_way module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0003_projectsite_way.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0003_projectsite_way.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0003_projectsite_way.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0004_alter_projectsite_way">core.migrations.0004_alter_projectsite_way module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0004_alter_projectsite_way.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0004_alter_projectsite_way.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0004_alter_projectsite_way.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0005_rename_site_location_path_site_loc">core.migrations.0005_rename_site_location_path_site_loc module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more">core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0007_projectsite">core.migrations.0007_projectsite module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0007_projectsite.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0007_projectsite.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0007_projectsite.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0008_remove_projectsiteaddress_geom_type">core.migrations.0008_remove_projectsiteaddress_geom_type module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type">core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-migrations-0010-project-owner-module">core.migrations.0010_project_owner module</a></li>
+<li><a class="reference internal" href="#module-core.migrations.0011_projectstatus_project_projectstatus">core.migrations.0011_projectstatus_project_projectstatus module</a><ul>
+<li><a class="reference internal" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Test</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">core.migrations package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/core.migrations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-migrations-package">
+<h1>core.migrations package<a class="headerlink" href="#core-migrations-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-core.migrations.0001_initial">
+<span id="core-migrations-0001-initial-module"></span><h2>core.migrations.0001_initial module<a class="headerlink" href="#module-core.migrations.0001_initial" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0001_initial.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0001_initial.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0001_initial.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0001_initial.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0001_initial.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#core.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0001_initial.Migration.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#core.migrations.0001_initial.Migration.initial" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0001_initial.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='AdditionalDoc',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('file',</span> <span class="pre">&lt;django.db.models.fields.files.FileField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Department',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('department_name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('creation_date',</span> <span class="pre">&lt;django.db.models.fields.DateField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Document',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('document_name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('created_at',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('identifier',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('content',</span> <span class="pre">&lt;django.db.models.fields.TextField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Path',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('site_address',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('site_location',</span> <span class="pre">&lt;django.contrib.gis.db.models.fields.PointField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Project',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('project_name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('description',</span> <span class="pre">&lt;django.db.models.fields.TextField&gt;),</span> <span class="pre">('start_date',</span> <span class="pre">&lt;django.db.models.fields.DateField&gt;),</span> <span class="pre">('deadline',</span> <span class="pre">&lt;django.db.models.fields.DateField&gt;),</span> <span class="pre">('complete',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='SummaryData',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('month',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('year',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('total_projects',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('total_users',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='ProjectSite',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('site_name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('site_area',</span> <span class="pre">&lt;django.contrib.gis.db.models.fields.PolygonField&gt;),</span> <span class="pre">('project',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('site_location',</span> <span class="pre">&lt;django.db.models.fields.related.OneToOneField&gt;)]&gt;]</span></em><a class="headerlink" href="#core.migrations.0001_initial.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="core-migrations-0002-initial-module">
+<h2>core.migrations.0002_initial module<a class="headerlink" href="#core-migrations-0002-initial-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-core.migrations.0003_projectsite_way">
+<span id="core-migrations-0003-projectsite-way-module"></span><h2>core.migrations.0003_projectsite_way module<a class="headerlink" href="#module-core.migrations.0003_projectsite_way" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0003_projectsite_way.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0003_projectsite_way.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0003_projectsite_way.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0003_projectsite_way.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0003_projectsite_way.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0002_initial')]</span></em><a class="headerlink" href="#core.migrations.0003_projectsite_way.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0003_projectsite_way.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='projectsite',</span> <span class="pre">name='way',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#core.migrations.0003_projectsite_way.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0004_alter_projectsite_way">
+<span id="core-migrations-0004-alter-projectsite-way-module"></span><h2>core.migrations.0004_alter_projectsite_way module<a class="headerlink" href="#module-core.migrations.0004_alter_projectsite_way" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0004_alter_projectsite_way.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0004_alter_projectsite_way.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0004_alter_projectsite_way.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0004_alter_projectsite_way.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0004_alter_projectsite_way.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('users',</span> <span class="pre">'0001_initial'),</span> <span class="pre">('core',</span> <span class="pre">'0003_projectsite_way')]</span></em><a class="headerlink" href="#core.migrations.0004_alter_projectsite_way.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0004_alter_projectsite_way.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='projectsite',</span> <span class="pre">name='way',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#core.migrations.0004_alter_projectsite_way.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0005_rename_site_location_path_site_loc">
+<span id="core-migrations-0005-rename-site-location-path-site-loc-module"></span><h2>core.migrations.0005_rename_site_location_path_site_loc module<a class="headerlink" href="#module-core.migrations.0005_rename_site_location_path_site_loc" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0005_rename_site_location_path_site_loc.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0005_rename_site_location_path_site_loc.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0005_rename_site_location_path_site_loc.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0005_rename_site_location_path_site_loc.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0004_alter_projectsite_way')]</span></em><a class="headerlink" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0005_rename_site_location_path_site_loc.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RenameField</span>&#160; <span class="pre">model_name='path',</span> <span class="pre">old_name='site_location',</span> <span class="pre">new_name='site_loc'&gt;]</span></em><a class="headerlink" href="#core.migrations.0005_rename_site_location_path_site_loc.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more">
+<span id="core-migrations-0006-projectsiteaddress-remove-projectsite-project-and-more-module"></span><h2>core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more module<a class="headerlink" href="#module-core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0006_projectsiteaddress_remove_projectsite_project_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0005_rename_site_location_path_site_loc')]</span></em><a class="headerlink" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='ProjectSiteAddress',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('geom',</span> <span class="pre">&lt;django.contrib.gis.db.models.fields.GeometryField&gt;),</span> <span class="pre">('geom_type',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;)]&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='projectsite',</span> <span class="pre">name='project'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='projectsite',</span> <span class="pre">name='site_location'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='projectsite',</span> <span class="pre">name='way'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='project',</span> <span class="pre">name='owner'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='project',</span> <span class="pre">name='project_members'&gt;,</span> <span class="pre">&lt;DeleteModel</span>&#160; <span class="pre">name='Path'&gt;,</span> <span class="pre">&lt;DeleteModel</span>&#160; <span class="pre">name='ProjectSite'&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='projectsiteaddress',</span> <span class="pre">name='project',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#core.migrations.0006_projectsiteaddress_remove_projectsite_project_and_more.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0007_projectsite">
+<span id="core-migrations-0007-projectsite-module"></span><h2>core.migrations.0007_projectsite module<a class="headerlink" href="#module-core.migrations.0007_projectsite" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0007_projectsite.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0007_projectsite.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0007_projectsite.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0007_projectsite.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0007_projectsite.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0006_projectsiteaddress_remove_projectsite_project_and_more')]</span></em><a class="headerlink" href="#core.migrations.0007_projectsite.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0007_projectsite.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='ProjectSite',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('site_loc',</span> <span class="pre">&lt;django.contrib.gis.db.models.fields.PointField&gt;),</span> <span class="pre">('site_area',</span> <span class="pre">&lt;django.contrib.gis.db.models.fields.PolygonField&gt;)]&gt;]</span></em><a class="headerlink" href="#core.migrations.0007_projectsite.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0008_remove_projectsiteaddress_geom_type">
+<span id="core-migrations-0008-remove-projectsiteaddress-geom-type-module"></span><h2>core.migrations.0008_remove_projectsiteaddress_geom_type module<a class="headerlink" href="#module-core.migrations.0008_remove_projectsiteaddress_geom_type" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0008_remove_projectsiteaddress_geom_type.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0008_remove_projectsiteaddress_geom_type.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0008_remove_projectsiteaddress_geom_type.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0007_projectsite')]</span></em><a class="headerlink" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='projectsiteaddress',</span> <span class="pre">name='geom_type'&gt;]</span></em><a class="headerlink" href="#core.migrations.0008_remove_projectsiteaddress_geom_type.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type">
+<span id="core-migrations-0009-projectsiteaddress-area-projectsiteaddress-geom-type-module"></span><h2>core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type module<a class="headerlink" href="#module-core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0009_projectsiteaddress_area_projectsiteaddress_geom_type.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0008_remove_projectsiteaddress_geom_type')]</span></em><a class="headerlink" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='projectsiteaddress',</span> <span class="pre">name='area',</span> <span class="pre">field=&lt;django.db.models.fields.FloatField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='projectsiteaddress',</span> <span class="pre">name='geom_type',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#core.migrations.0009_projectsiteaddress_area_projectsiteaddress_geom_type.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="core-migrations-0010-project-owner-module">
+<h2>core.migrations.0010_project_owner module<a class="headerlink" href="#core-migrations-0010-project-owner-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-core.migrations.0011_projectstatus_project_projectstatus">
+<span id="core-migrations-0011-projectstatus-project-projectstatus-module"></span><h2>core.migrations.0011_projectstatus_project_projectstatus module<a class="headerlink" href="#module-core.migrations.0011_projectstatus_project_projectstatus" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.migrations.0011_projectstatus_project_projectstatus.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.migrations.0011_projectstatus_project_projectstatus.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/migrations/0011_projectstatus_project_projectstatus.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0011_projectstatus_project_projectstatus.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('core',</span> <span class="pre">'0010_project_owner')]</span></em><a class="headerlink" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration.dependencies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.migrations.0011_projectstatus_project_projectstatus.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='ProjectStatus',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('color',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('status',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('is_default',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('date_created',</span> <span class="pre">&lt;django.db.models.fields.DateField&gt;),</span> <span class="pre">('date_modified',</span> <span class="pre">&lt;django.db.models.fields.DateField&gt;),</span> <span class="pre">('project',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='project',</span> <span class="pre">name='projectstatus',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#core.migrations.0011_projectstatus_project_projectstatus.Migration.operations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-core.migrations" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, RB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

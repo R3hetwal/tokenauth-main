@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test.test_departmentapi &mdash; Test  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Test
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../test.html">test package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Test</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">test.test_departmentapi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for test.test_departmentapi</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APITestCase</span><span class="p">,</span> <span class="n">APIRequestFactory</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">users.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">core.models</span> <span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span> <span class="nn">core.models</span> <span class="kn">import</span> <span class="n">Department</span>
+<span class="kn">from</span> <span class="nn">api.serializers.serializers</span> <span class="kn">import</span> <span class="n">DepartmentSerializer</span>
+<span class="kn">from</span> <span class="nn">rest_framework.authtoken.models</span> <span class="kn">import</span> <span class="n">Token</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unit test case for the DepartmentAPIView.</span>
+
+<span class="sd">    This test case verifies the behavior of the DepartmentAPIView by testing various HTTP methods for department operations.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        user (User): A test user object created for testing purposes.</span>
+<span class="sd">        token (Token): A token associated with the test user.</span>
+<span class="sd">        project (Project): A test project object created for testing purposes.</span>
+<span class="sd">        department (Department): A test department object created for testing purposes.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        setUp(): Set up the necessary objects and credentials for testing.</span>
+<span class="sd">        test_get(): Test the GET request for retrieving departments.</span>
+<span class="sd">        test_post(): Test the POST request for creating a new department.</span>
+<span class="sd">        test_put(): Test the PUT request for updating a department.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DepartmentAPIViewTestCase"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase">[docs]</a><span class="k">class</span> <span class="nc">DepartmentAPIViewTestCase</span><span class="p">(</span><span class="n">APITestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="DepartmentAPIViewTestCase.setUp"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">         Set up the necessary objects and credentials for testing.</span>
+
+<span class="sd">        This method initializes the APIRequestFactory for creating test requests.</span>
+<span class="sd">        It creates a user with the specified email and user_name using the User model&#39;s `create` method.</span>
+<span class="sd">        The method also generates a token for the user using the Token model&#39;s `create` method.</span>
+
+<span class="sd">        Additionally, it creates a test project with the specified project_name and description using the </span>
+<span class="sd">        Project model&#39;s `create` method.</span>
+
+<span class="sd">        Lastly, the method sets the authentication credentials for the test client by adding the token to the</span>
+<span class="sd">        &#39;Authorization&#39; header.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">APIRequestFactory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;detective@gmail.com&#39;</span><span class="p">,</span> <span class="n">user_name</span><span class="o">=</span><span class="s1">&#39;thedetective&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">Token</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;Test Project&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test Description&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">credentials</span><span class="p">(</span><span class="n">HTTP_AUTHORIZATION</span><span class="o">=</span><span class="s1">&#39;Token &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="o">.</span><span class="n">key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DepartmentAPIViewTestCase.test_get"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase.test_get">[docs]</a>    <span class="k">def</span> <span class="nf">test_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the GET request for retrieving departments.</span>
+
+<span class="sd">        This method sends a GET request to the &#39;/api/v1/departments/&#39; URL using the test client.</span>
+<span class="sd">        It then asserts that the response status code is HTTP 200 OK.</span>
+
+<span class="sd">        If needed, we can verify the retrieved departments data by comparing it with the serialized</span>
+<span class="sd">        data obtained from the DepartmentSerializer. The method retrieves all departments from the</span>
+<span class="sd">        database, serializes them using the DepartmentSerializer, and asserts that the response data</span>
+<span class="sd">        matches the serialized data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/api/v1/departments/&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="c1"># Verify the retrieved departments data if needed</span>
+        <span class="n">departments</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">DepartmentSerializer</span><span class="p">(</span><span class="n">departments</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DepartmentAPIViewTestCase.test_post"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase.test_post">[docs]</a>    <span class="k">def</span> <span class="nf">test_post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the POST request for creating a new department.</span>
+
+<span class="sd">        This method sends a POST request to the &#39;/api/v1/departments/&#39; URL using the test client.</span>
+<span class="sd">        It includes the necessary data for creating a new department, such as the department name,</span>
+<span class="sd">        department head, members, creation date, and associated project.</span>
+
+<span class="sd">        After the request is sent, the method asserts that the response status code is HTTP 201 CREATED.</span>
+
+<span class="sd">        Furthermore, it verifies that the department is correctly saved in the database by retrieving it</span>
+<span class="sd">        and performing several assertions. It checks that the department&#39;s attributes, such as the</span>
+<span class="sd">        department head, members, creation date, and associated project, match the expected values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;department_name&#39;</span><span class="p">:</span> <span class="s1">&#39;New Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;department_head&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+            <span class="s1">&#39;creation_date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()),</span>
+            <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/api/v1/departments/&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
+
+        <span class="c1"># Verify that the department is saved in the database</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">department_name</span><span class="o">=</span><span class="s1">&#39;New Department&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">department_head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">department</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">creation_date</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">department</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="DepartmentAPIViewTestCase.test_put"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase.test_put">[docs]</a>    <span class="k">def</span> <span class="nf">test_put</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Test the PUT request for updating a department.</span>
+
+<span class="sd">        This method sends a PUT request to the &#39;/api/v1/departments/{department_id}/&#39; URL</span>
+<span class="sd">        using the test client. It includes the necessary data for updating the department,</span>
+<span class="sd">        such as the department name, department head, members, creation date, and associated project.</span>
+
+<span class="sd">        After the request is sent, the method asserts that the response status code is HTTP 200 OK.</span>
+
+<span class="sd">        Furthermore, it verifies that the department is correctly updated in the database by</span>
+<span class="sd">        retrieving it and performing several assertions. It checks that the department&#39;s attributes,</span>
+<span class="sd">        such as the department name, department head, members, creation date, and associated project,</span>
+<span class="sd">        match the updated values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">department_name</span><span class="o">=</span><span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="n">department_head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+            <span class="n">creation_date</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;department_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;department_head&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+            <span class="s1">&#39;creation_date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()),</span>
+            <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/api/v1/departments/</span><span class="si">{</span><span class="n">department</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="c1"># Verify that the department is updated in the database</span>
+        <span class="n">department</span><span class="o">.</span><span class="n">refresh_from_db</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">department_name</span><span class="p">,</span> <span class="s1">&#39;Updated Department&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DepartmentAPIViewTestCase.test_delete"><a class="viewcode-back" href="../../test.html#test.test_departmentapi.DepartmentAPIViewTestCase.test_delete">[docs]</a>    <span class="k">def</span> <span class="nf">test_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the DELETE request for deleting a specific department.</span>
+
+<span class="sd">        This method sends a DELETE request to the &#39;/api/v1/departments/{department_id}/&#39; URL using the test client.</span>
+<span class="sd">        It retrieves the department ID from the `self.department` attribute, assuming it has been previously set up.</span>
+
+<span class="sd">        The method asserts that the response status code is HTTP 204 NO CONTENT, indicating a successful deletion.</span>
+
+<span class="sd">        Additionally, it verifies that the department is no longer present in the database by attempting</span>
+<span class="sd">        to retrieve it again.</span>
+
+<span class="sd">        It uses the `Department.DoesNotExist` exception to assert that the department no longer exists.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">department_name</span><span class="o">=</span><span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="n">department_head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+            <span class="n">creation_date</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/api/v1/departments/</span><span class="si">{</span><span class="n">department</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+
+        <span class="c1"># Verify that the department is no longer present in the database</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">Department</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">):</span>
+            <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">department</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div></div>
+
+
+
+
+
+<span class="c1"># import pytest</span>
+<span class="c1"># from django.urls import reverse</span>
+<span class="c1"># from rest_framework import status</span>
+<span class="c1"># from rest_framework.test import APIClient</span>
+
+<span class="c1"># @pytest.mark.django_db</span>
+<span class="c1"># class TestDepartmentAPIView:</span>
+<span class="c1">#     @pytest.fixture</span>
+<span class="c1">#     def api_client(self):</span>
+<span class="c1">#         return APIClient()</span>
+
+<span class="c1">#     def test_get_departments(self, api_client):</span>
+<span class="c1">#         url = reverse(&#39;department-list&#39;)</span>
+<span class="c1">#         response = api_client.get(url)</span>
+<span class="c1">#         assert response.status_code == status.HTTP_200_OK</span>
+
+<span class="c1">#     def test_create_department(self, api_client):</span>
+<span class="c1">#         url = reverse(&#39;department-list&#39;)</span>
+<span class="c1">#         data = {</span>
+<span class="c1">#             &#39;department_name&#39;: &#39;New Department&#39;,</span>
+<span class="c1">#             &#39;department_head&#39;: 3,  </span>
+<span class="c1">#             &#39;members&#39;: [3],  </span>
+<span class="c1">#             &#39;creation_date&#39;: &#39;2023-06-16&#39;,</span>
+<span class="c1">#             &#39;project&#39;: [196], </span>
+<span class="c1">#         }</span>
+<span class="c1">#         response = api_client.post(url, data)</span>
+<span class="c1">#         assert response.status_code == status.HTTP_201_CREATED</span>
+
+<span class="c1">#     def test_update_department(self, api_client):</span>
+<span class="c1">#         department = Department.objects.create(</span>
+<span class="c1">#             department_name=&#39;Test Department&#39;,</span>
+<span class="c1">#             department_head_id=3,  </span>
+<span class="c1">#             creation_date=&#39;2023-06-16&#39;,</span>
+<span class="c1">#         )</span>
+<span class="c1">#         url = reverse(&#39;department-detail&#39;, args=[department.pk])</span>
+<span class="c1">#         data = {</span>
+<span class="c1">#             &#39;department_name&#39;: &#39;Updated Department&#39;,</span>
+<span class="c1">#             &#39;department_head&#39;: 3,  </span>
+<span class="c1">#             &#39;members&#39;: [3],  </span>
+<span class="c1">#             &#39;creation_date&#39;: &#39;2023-06-17&#39;,</span>
+<span class="c1">#             &#39;project&#39;: [196],  </span>
+<span class="c1">#         }</span>
+<span class="c1">#         response = api_client.put(url, data)</span>
+<span class="c1">#         assert response.status_code == status.HTTP_200_OK</span>
+
+<span class="c1">#     def test_delete_department(self, api_client):</span>
+<span class="c1">#         department = Department.objects.create(</span>
+<span class="c1">#             department_name=&#39;Test Department&#39;,</span>
+<span class="c1">#             department_head_id=3,  </span>
+<span class="c1">#             creation_date=&#39;2023-06-16&#39;,</span>
+<span class="c1">#         )</span>
+<span class="c1">#         url = reverse(&#39;department-detail&#39;, args=[dep6artment.pk])</span>
+<span class="c1">#         response = api_client.delete(url)</span>
+<span class="c1">#         assert response.status_code == status.HTTP_204_NO_CONTENT</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, RB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
