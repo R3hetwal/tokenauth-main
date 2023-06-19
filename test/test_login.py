@@ -1,21 +1,3 @@
-import pytest
-from rest_framework.test import APIClient
-from django.urls import reverse
-
-@pytest.mark.test
-def test_login():
-    print("Login Successful !!!")
-
-@pytest.mark.mul
-def testCalculation():
-    assert 2*3 == 6
-
-@pytest.mark.regression
-def testLogoff():
-    print("Logging out successfully!!!")
-
-
-##################################  LOGIN TEST  ####################################################
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.authtoken.models import Token
 from rest_framework import status
