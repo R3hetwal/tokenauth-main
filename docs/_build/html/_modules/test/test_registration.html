@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test.test_registration &mdash; Test  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Test
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Test</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">test.test_registration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for test.test_registration</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">RequestFactory</span>
+<span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APITestCase</span><span class="p">,</span> <span class="n">APIClient</span>
+<span class="kn">from</span> <span class="nn">rest_framework.authtoken.models</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">users.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unit test case for the user registration functionality.</span>
+
+<span class="sd">    This test case verifies the behavior of the user registration endpoint by testing the registration </span>
+<span class="sd">    process using POST requests with valid and invalid data.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        client (APIClient): An instance of the APIClient for making test requests.</span>
+<span class="sd">        factory (RequestFactory): An instance of the RequestFactory for creating mock requests.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        setUp(): Set up the necessary objects and credentials for testing.</span>
+<span class="sd">        test_user_registration(): Test the user registration functionality by making a POST request to </span>
+<span class="sd">                                  the registration endpoint with valid data and checking the response.</span>
+<span class="sd">        test_user_registration_invalid_data(): Test the user registration endpoint behavior when invalid </span>
+<span class="sd">                                               data is provided by making a POST request with invalid data </span>
+<span class="sd">                                               and checking the response.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="UserRegistrationViewSetTest"><a class="viewcode-back" href="../../test.html#test.test_registration.UserRegistrationViewSetTest">[docs]</a><span class="k">class</span> <span class="nc">UserRegistrationViewSetTest</span><span class="p">(</span><span class="n">APITestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="UserRegistrationViewSetTest.setUp"><a class="viewcode-back" href="../../test.html#test.test_registration.UserRegistrationViewSetTest.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up the necessary objects and credentials for testing.</span>
+
+<span class="sd">        This method initializes the APIClient for making test API requests and the RequestFactory for </span>
+<span class="sd">        creating mock requests.</span>
+
+<span class="sd">        It sets the `client` attribute as an instance of `APIClient` for making HTTP requests during the </span>
+<span class="sd">        tests.</span>
+<span class="sd">        The `factory` attribute is set as an instance of `RequestFactory` for creating mock requests.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">APIClient</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="UserRegistrationViewSetTest.test_user_registration"><a class="viewcode-back" href="../../test.html#test.test_registration.UserRegistrationViewSetTest.test_user_registration">[docs]</a>    <span class="k">def</span> <span class="nf">test_user_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case for user registration.</span>
+
+<span class="sd">        This test verifies the registration process for a new user by making a POST request to the registration </span>
+<span class="sd">        endpoint.</span>
+
+<span class="sd">        It constructs the URL for the registration endpoint and prepares the data payload containing the necessary </span>
+<span class="sd">        user information.</span>
+<span class="sd">        The data payload includes fields such as email, password, confirm_password, user_name, first_name, last_name, </span>
+<span class="sd">        and contact.</span>
+
+<span class="sd">        It creates a mock POST request using the `RequestFactory` and sends the request using the `client.post` method.</span>
+<span class="sd">        The response from the registration endpoint is captured and printed for debugging purposes.</span>
+
+<span class="sd">        It asserts the expected status code of the response, which is `status.HTTP_200_OK`.</span>
+<span class="sd">        It also verifies the presence of specific keys in the response data dictionary, such as &#39;status&#39;, &#39;payload&#39;, </span>
+<span class="sd">        &#39;token&#39;, and &#39;msg&#39;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/users/v1/sign-up/&#39;</span>  
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="s1">&#39;test52@gmail.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;user_name&#39;</span><span class="p">:</span><span class="s1">&#39;test52&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;contact&#39;</span><span class="p">:</span><span class="s1">&#39;9813256040&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span><span class="s1">&#39;Test1212*&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;confirm_password&#39;</span><span class="p">:</span><span class="s1">&#39;Test1212*&#39;</span>
+        <span class="p">}</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;payload&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;msg&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UserRegistrationViewSetTest.test_user_registration_invalid_data"><a class="viewcode-back" href="../../test.html#test.test_registration.UserRegistrationViewSetTest.test_user_registration_invalid_data">[docs]</a>    <span class="k">def</span> <span class="nf">test_user_registration_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case for user registration with invalid data.</span>
+
+<span class="sd">        This test verifies the behavior of the user registration endpoint when invalid data is provided.</span>
+
+<span class="sd">        It constructs the URL for the registration endpoint and prepares the invalid data payload.</span>
+<span class="sd">        The invalid data payload includes fields such as &#39;username&#39;, &#39;email&#39;, and &#39;password&#39;.</span>
+
+<span class="sd">        It sends a POST request to the registration endpoint using the `client.post` method with the </span>
+<span class="sd">        invalid data payload.</span>
+<span class="sd">        The response from the registration endpoint is captured.</span>
+
+<span class="sd">        It asserts the expected status code of the response, which is `status.HTTP_400_BAD_REQUEST`.</span>
+<span class="sd">        This ensures that the registration endpoint properly handles the invalid data and returns an </span>
+<span class="sd">        appropriate error response.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/users/v1/sign-up/&#39;</span>  
+        <span class="n">invalid_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;testpassword&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">invalid_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, RB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
