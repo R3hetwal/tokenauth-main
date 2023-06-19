@@ -24,7 +24,8 @@ from users.models import User
 """
     Unit test case for the login functionality.
 
-    This test case verifies the behavior of the login endpoint by testing the login process using a POST request.
+    This test case verifies the behavior of the login endpoint by testing the login process using a POST
+    request.
 
     Attributes:
         client (APIClient): An instance of the APIClient for making test requests.
@@ -36,7 +37,8 @@ from users.models import User
 
     Methods:
         setUp(): Set up the necessary objects and credentials for testing.
-        test_login(): Test the login functionality by sending a POST request to the login endpoint and checking the response.
+        test_login(): Test the login functionality by sending a POST request to the login endpoint and 
+                      checking the response.
 
 """
 
